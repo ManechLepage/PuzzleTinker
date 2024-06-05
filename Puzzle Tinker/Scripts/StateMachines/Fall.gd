@@ -2,11 +2,10 @@ extends State
 
 @export var jump: State
 @export var run: State
-@export var fall: State
+@export var idle: State
 
 func enter():
 	super()
-	parent.velocity.x = 0
 
 func process_inputs(event):
 	if Input.is_action_just_pressed("Jump") and parent.is_on_floor():
@@ -19,10 +18,9 @@ func process_physics(delta):
 	parent.velocity.y += gravity * delta
 	parent.move_and_slide()
 	
-	if parent.velocity.y > 0:
-		return fall
-	
 	var movement = Input.get_axis("Left", "Right") * move_speed
-	if movement != 0:
-		return run
+	if parent.is_on_floor():
+		if movement != 0:
+			return run
+		return idle
 	return null

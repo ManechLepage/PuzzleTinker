@@ -2,6 +2,7 @@ extends State
 
 @export var idle: State
 @export var run: State
+@export var fall: State
 
 @export var jump_force: float = 500.0
 
@@ -19,6 +20,9 @@ func process_physics(delta):
 	
 	parent.velocity.x = movement
 	parent.move_and_slide()
+	
+	if parent.velocity.y > 0:
+		return fall
 	
 	if parent.is_on_floor():
 		if movement != 0:

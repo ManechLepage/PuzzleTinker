@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ptf7ir27qjf2"]
+[gd_scene load_steps=9 format=3 uid="uid://ptf7ir27qjf2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_kr3eo"]
 [ext_resource type="Texture2D" uid="uid://bose1uoas5b7f" path="res://icon.svg" id="2_173g7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachines/Idle.gd" id="3_x76ds"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/Running.gd" id="5_3vnwb"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/Jumping.gd" id="5_mwof0"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/Fall.gd" id="7_pdubd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
 size = Vector2(128, 128)
@@ -23,17 +24,25 @@ shape = SubResource("RectangleShape2D_pp67r")
 script = ExtResource("3_uyyvb")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run", "fall")]
 script = ExtResource("3_x76ds")
 jump = NodePath("../Jumping")
 run = NodePath("../Running")
+fall = NodePath("../Fall")
 
 [node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "idle")]
 script = ExtResource("5_3vnwb")
 jump = NodePath("../Jumping")
 idle = NodePath("../Idle")
 
-[node name="Jumping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "run")]
+[node name="Jumping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "run", "fall")]
 script = ExtResource("5_mwof0")
 idle = NodePath("../Idle")
 run = NodePath("../Running")
+fall = NodePath("../Fall")
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run", "idle")]
+script = ExtResource("7_pdubd")
+jump = NodePath("../Jumping")
+run = NodePath("../Running")
+idle = NodePath("../Idle")
