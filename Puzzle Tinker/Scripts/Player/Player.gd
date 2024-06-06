@@ -3,7 +3,9 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var has_jumped: bool = false
+var facing_right: bool = true
 
+@onready var sprite_2d = $Sprite2D
 @onready var state_machine = $StateMachine
 
 func _ready():

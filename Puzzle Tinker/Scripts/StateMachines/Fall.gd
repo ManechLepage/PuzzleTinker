@@ -25,6 +25,7 @@ func process_inputs(event):
 
 func process_physics(delta):
 	var movement = Input.get_axis("Left", "Right") * move_speed
+	flip_character(movement)
 	
 	parent.velocity.y += gravity * delta * gravity_multiplier
 	parent.velocity.x = movement

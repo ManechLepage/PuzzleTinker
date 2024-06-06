@@ -21,3 +21,10 @@ func process_frames(delta):
 
 func process_physics(delta):
 	return null
+
+func flip_character(movement):
+	if movement < 0 and !parent.facing_right:
+		parent.facing_right = true
+	elif movement > 0 and parent.facing_right:
+		parent.facing_right = false
+	parent.sprite_2d.flip_h = parent.facing_right
