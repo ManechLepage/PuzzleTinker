@@ -3,7 +3,7 @@ extends Node
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var move_speed: float = 400
+var move_speed: float = 225
 
 var parent: Player
 

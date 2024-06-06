@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ptf7ir27qjf2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_kr3eo"]
-[ext_resource type="Texture2D" uid="uid://bose1uoas5b7f" path="res://icon.svg" id="2_173g7"]
+[ext_resource type="Texture2D" uid="uid://b83bqc6ame1p8" path="res://Graphics/Player/default.aseprite" id="2_012nm"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/PlayerStateMachine.gd" id="3_uyyvb"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/Idle.gd" id="3_x76ds"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/Running.gd" id="5_3vnwb"]
@@ -9,15 +9,17 @@
 [ext_resource type="Script" path="res://Scripts/StateMachines/Fall.gd" id="7_pdubd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
-size = Vector2(128, 128)
+size = Vector2(32, 58)
 
 [node name="Player" type="CharacterBody2D"]
+texture_filter = 1
 script = ExtResource("1_kr3eo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_173g7")
+texture = ExtResource("2_012nm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_pp67r")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
@@ -30,19 +32,29 @@ jump = NodePath("../Jumping")
 run = NodePath("../Running")
 fall = NodePath("../Fall")
 
-[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "idle")]
+[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "idle", "fall")]
 script = ExtResource("5_3vnwb")
 jump = NodePath("../Jumping")
 idle = NodePath("../Idle")
+fall = NodePath("../Fall")
 
 [node name="Jumping" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "run", "fall")]
 script = ExtResource("5_mwof0")
 idle = NodePath("../Idle")
 run = NodePath("../Running")
 fall = NodePath("../Fall")
+jump_force = 450.0
 
 [node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run", "idle")]
 script = ExtResource("7_pdubd")
 jump = NodePath("../Jumping")
 run = NodePath("../Running")
 idle = NodePath("../Idle")
+
+[node name="CoyoteJump" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.3
+one_shot = true
+
+[node name="InputDelay" type="Timer" parent="StateMachine/Fall"]
+wait_time = 0.3
+one_shot = true

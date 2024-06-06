@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var has_jumped: bool = false
 
 @onready var state_machine = $StateMachine
 
