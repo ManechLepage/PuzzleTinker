@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dko2d6htfytjo"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/item_preview.gd" id="1_q1l6m"]
+
+[node name="ItemPreview" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1l6m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Item name"
+
+[node name="Quantity" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"

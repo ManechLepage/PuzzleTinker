@@ -3,6 +3,7 @@ extends State
 @export var jump: State
 @export var run: State
 @export var fall: State
+@export var mine: State
 
 func enter():
 	super()
@@ -13,6 +14,9 @@ func process_inputs(event):
 		return jump
 	if Input.is_action_just_pressed("Left") or Input.is_action_just_pressed("Right"):
 		return run
+	if Input.is_action_just_pressed("Left Click"):
+		if can_mine():
+			return mine
 	return null
 
 func process_physics(delta):

@@ -28,3 +28,12 @@ func flip_character(movement):
 	elif movement > 0 and parent.facing_right:
 		parent.facing_right = false
 	parent.sprite_2d.flip_h = parent.facing_right
+
+func can_mine():
+	var player_tile_map_pos = parent.tile_map.local_to_map(parent.position)
+	for tile in parent.tile_map.get_surrounding_cells(player_tile_map_pos):
+		var tile_data = parent.tile_map.get_cell_tile_data(0, tile)
+		if tile_data:
+			if tile_data.get_custom_data("mineral"):
+				return true
+	return false
