@@ -1,6 +1,7 @@
 extends Control
 
-@onready var item_container = $MarginContainer/VBoxContainer
+@onready var item_container = %ItemContainer
+@onready var structure_container = %StructureContainer
 @export var item_preview_scene: PackedScene
 
 var hide: bool = false
