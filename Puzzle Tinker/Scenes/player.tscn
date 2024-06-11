@@ -14,9 +14,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
 size = Vector2(32, 58)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("building_state") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_kr3eo")
+building_state = NodePath("StateMachine/Building")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_012nm")
@@ -73,7 +74,11 @@ copper = ExtResource("9_areoq")
 wait_time = 1.5
 one_shot = true
 
-[node name="Building" type="Node" parent="StateMachine"]
+[node name="Building" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "jump", "run")]
 script = ExtResource("10_naecw")
+idle = NodePath("../Idle")
+jump = NodePath("../Jumping")
+run = NodePath("../Running")
 
 [connection signal="timeout" from="StateMachine/Mine/Timer" to="StateMachine/Mine" method="_on_timer_timeout"]
+[connection signal="place_block" from="StateMachine/Building" to="." method="_on_building_place_block"]

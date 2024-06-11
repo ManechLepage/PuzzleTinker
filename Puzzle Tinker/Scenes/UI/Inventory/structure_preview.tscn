@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Inventory/ItemPreview.gd" id="1_vja7k"]
 
-[node name="ItemPreview" type="Control"]
+[node name="StructurePreview" type="Control" node_paths=PackedStringArray("item_name", "icon", "quantity")]
 texture_filter = 1
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vja7k")
+item_name = NodePath("Button/HBoxContainer/ItemName")
+icon = NodePath("Button/HBoxContainer/Icon")
+quantity = NodePath("Button/HBoxContainer/Quantity")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -32,9 +36,12 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="ItemName" type="Label" parent="Button/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Item name"
 
 [node name="Quantity" type="Label" parent="Button/HBoxContainer"]
 layout_mode = 2
 text = "0"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

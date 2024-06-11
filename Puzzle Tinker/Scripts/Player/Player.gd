@@ -10,6 +10,8 @@ var inventory: Inventory
 @onready var sprite_2d = $Sprite2D
 @onready var state_machine = $StateMachine
 
+@export var building_state: State
+
 func _ready():
 	tile_map = get_tree().get_first_node_in_group("TileMap")
 	inventory = get_tree().get_first_node_in_group("Inventory")
@@ -23,3 +25,10 @@ func _process(delta):
 
 func _unhandled_input(event):
 	state_machine.process_inputs(event)
+
+func start_building(structure: Structure):
+	building_state.currently_placing = structure
+	state_machine.change_state(building_state)
+
+func _on_building_place_block(structure):
+	get_tree().get_first_node_in_group("TileMap").place_structure(structure, get_global_mouse_position())

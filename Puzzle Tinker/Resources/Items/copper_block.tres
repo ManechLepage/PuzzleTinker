@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://kst487i7rgna"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/Structure.gd" id="1_501j0"]
 [ext_resource type="Texture2D" uid="uid://ciwwwrvvijtkx" path="res://Graphics/Items/copper.aseprite" id="1_udcip"]
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="2_8e0s7"]
 
 [resource]
-script = ExtResource("1_501j0")
-structure_atlas_coords = Vector2i(0, 0)
+script = ExtResource("2_8e0s7")
+structure_id = 1
 name = &"Copper Block"
 icon = ExtResource("1_udcip")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5ag4v3wkpftu"]
+
+[ext_resource type="Texture2D" uid="uid://ciwwwrvvijtkx" path="res://Graphics/Items/copper.aseprite" id="1_y3ay5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_veiht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y3ay5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Structure" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_veiht")
