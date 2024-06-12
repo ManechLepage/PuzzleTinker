@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=3 format=3 uid="uid://c8bt3kr0ee7dr"]
+
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_48jj7"]
+[ext_resource type="Resource" uid="uid://cyiypdip1t3ww" path="res://Resources/Items/cable.tres" id="1_pvfxd"]
+
+[resource]
+script = ExtResource("1_48jj7")
+item = ExtResource("1_pvfxd")
+craft = {}
+quantity = 1
+type = 0

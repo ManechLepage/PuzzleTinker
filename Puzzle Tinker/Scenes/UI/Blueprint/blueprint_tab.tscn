@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8o0ts27emqr6"]
+
+[ext_resource type="Script" path="res://Scripts/UI/BlueprintTabLoader.gd" id="1_sq23t"]
+[ext_resource type="PackedScene" uid="uid://c5qlspy5lk2ci" path="res://Scenes/UI/Blueprint/blueprint_preview.tscn" id="2_yb0dm"]
+
+[node name="BlueprintTab" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sq23t")
+blueprint_preview_scene = ExtResource("2_yb0dm")

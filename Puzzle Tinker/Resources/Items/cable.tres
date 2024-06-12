@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://cyiypdip1t3ww"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_hkm84"]
+[ext_resource type="Texture2D" uid="uid://ciwwwrvvijtkx" path="res://Graphics/Items/copper.aseprite" id="1_jhvdc"]
+
+[resource]
+script = ExtResource("1_hkm84")
+structure_id = 0
+name = &"Cable"
+icon = ExtResource("1_jhvdc")

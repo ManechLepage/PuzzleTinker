@@ -16,5 +16,6 @@ func process_inputs(event):
 		return run
 	if Input.is_action_just_pressed("Left Click"):
 		place_block.emit(currently_placing)
+		parent.inventory.add_item(currently_placing, -1)
 		return idle
 	return null
