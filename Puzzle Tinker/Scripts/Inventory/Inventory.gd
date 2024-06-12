@@ -4,8 +4,6 @@ extends Node
 var data: Dictionary
 signal inventory_update(data)
 
-@export var copper_block: Structure
-
 func add_item(item: Item, count: int):
 	if data.has(item):
 		data[item] += count
@@ -15,6 +13,11 @@ func add_item(item: Item, count: int):
 		data[item] = count
 	inventory_update.emit(data)
 
-func _input(event):
-	if Input.is_action_just_pressed("Test1"):
-		add_item(copper_block, 1)
+func can_build(blueprint: Blueprint):
+	for i in blueprint.craft:
+		if data.has(i.item):
+			if data[i.item] < i.quantity:
+				return false
+		else:
+			return false
+	return true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/BlueprintTabLoader.gd" id="1_sq23t"]
 [ext_resource type="PackedScene" uid="uid://c5qlspy5lk2ci" path="res://Scenes/UI/Blueprint/blueprint_preview.tscn" id="2_yb0dm"]
 
-[node name="BlueprintTab" type="VBoxContainer"]
+[node name="BlueprintTab" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

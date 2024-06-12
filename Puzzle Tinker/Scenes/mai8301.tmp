@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dq0dlmq0r070t"]
+[gd_scene load_steps=18 format=3 uid="uid://dq0dlmq0r070t"]
 
 [ext_resource type="PackedScene" uid="uid://ptf7ir27qjf2" path="res://Scenes/player.tscn" id="1_8xhch"]
 [ext_resource type="Texture2D" uid="uid://cjhsraqyiv8xm" path="res://Graphics/TileSet/Stone.aseprite" id="2_075ho"]
@@ -7,15 +7,12 @@
 [ext_resource type="Script" path="res://Scripts/TileMap.gd" id="4_naomi"]
 [ext_resource type="PackedScene" uid="uid://dko2d6htfytjo" path="res://Scenes/UI/Inventory/item_preview.tscn" id="4_nxub5"]
 [ext_resource type="Script" path="res://Scripts/Inventory/InventoryUI.gd" id="4_ok1e3"]
+[ext_resource type="Resource" uid="uid://kst487i7rgna" path="res://Resources/Items/copper_block.tres" id="4_yejck"]
 [ext_resource type="Script" path="res://Scripts/Blueprints/BlueprintManager.gd" id="7_q2ywv"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="7_sa86g"]
 [ext_resource type="PackedScene" uid="uid://cbesap8j4ifi" path="res://Scenes/UI/Inventory/structure_preview.tscn" id="7_vks8e"]
 [ext_resource type="Script" path="res://Scripts/UI/BlueprintUI.gd" id="11_fjju1"]
 [ext_resource type="PackedScene" uid="uid://b8o0ts27emqr6" path="res://Scenes/UI/Blueprint/blueprint_tab.tscn" id="12_3erln"]
-[ext_resource type="Script" path="res://Scripts/UI/BlueprintInfo.gd" id="14_2fvga"]
-[ext_resource type="PackedScene" uid="uid://ch55cjpdscx7y" path="res://Scenes/UI/Blueprint/blueprint_craft.tscn" id="15_7y5ws"]
-[ext_resource type="Script" path="res://Scripts/UI/TinkerUI.gd" id="15_qi1ix"]
-[ext_resource type="Texture2D" uid="uid://c468jbf466btk" path="res://Graphics/UI/simple-arrow-sign-png.webp" id="16_5s5o1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wke8s"]
 texture = ExtResource("2_075ho")
@@ -630,8 +627,8 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("4_naomi")
 
 [node name="Inventory" type="Node" parent="." groups=["Inventory"]]
-unique_name_in_owner = true
 script = ExtResource("3_8i58g")
+copper_block = ExtResource("4_yejck")
 
 [node name="Blueprints" type="Node" parent="." groups=["Blueprints"]]
 unique_name_in_owner = true
@@ -746,8 +743,8 @@ grow_vertical = 2
 layout_mode = 2
 tab_count = 3
 tab_0/title = "Power"
-tab_1/title = "Base"
-tab_2/title = "Top"
+tab_1/title = "Movement"
+tab_2/title = "Crafters"
 
 [node name="Blueprints" type="MarginContainer" parent="UI/Blueprints/VBoxContainer"]
 custom_minimum_size = Vector2(100, 70)
@@ -756,316 +753,4 @@ layout_mode = 2
 [node name="Panel" type="Panel" parent="UI/Blueprints/VBoxContainer/Blueprints"]
 layout_mode = 2
 
-[node name="Tabs" type="MarginContainer" parent="UI/Blueprints/VBoxContainer/Blueprints"]
-layout_mode = 2
-
-[node name="0" parent="UI/Blueprints/VBoxContainer/Blueprints/Tabs" instance=ExtResource("12_3erln")]
-layout_mode = 2
-
-[node name="1" parent="UI/Blueprints/VBoxContainer/Blueprints/Tabs" instance=ExtResource("12_3erln")]
-visible = false
-layout_mode = 2
-
-[node name="2" parent="UI/Blueprints/VBoxContainer/Blueprints/Tabs" instance=ExtResource("12_3erln")]
-visible = false
-layout_mode = 2
-
-[node name="BlueprintInfo" type="Control" parent="UI"]
-unique_name_in_owner = true
-visible = false
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -126.5
-offset_top = -192.0
-offset_right = 126.5
-offset_bottom = 192.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("14_2fvga")
-craft_text = ExtResource("15_7y5ws")
-
-[node name="Panel" type="Panel" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Name" type="Label" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 7.0
-offset_bottom = 30.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 25
-text = "Name"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 12.0
-offset_top = 43.0
-offset_right = -12.0
-offset_bottom = 48.0
-grow_horizontal = 2
-
-[node name="Description" type="Label" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 11.0
-offset_top = -127.0
-offset_right = 128.0
-offset_bottom = 12.0
-grow_vertical = 2
-text = "Description ----------------------------------------------------------------------------------------"
-autowrap_mode = 3
-
-[node name="TextureRect" type="TextureRect" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -112.0
-offset_top = -116.0
-offset_right = -12.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -29.0
-offset_right = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="UI/BlueprintInfo/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Build"
-horizontal_alignment = 1
-
-[node name="Craft" type="VBoxContainer" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.505
-anchor_right = 0.984
-anchor_bottom = 0.909
-offset_left = -0.072
-offset_top = 0.0800018
-offset_right = 0.0479889
-offset_bottom = -0.0560303
-
-[node name="Title" type="Label" parent="UI/BlueprintInfo/Craft"]
-layout_mode = 2
-text = "Craft"
-horizontal_alignment = 1
-
-[node name="Close" type="Button" parent="UI/BlueprintInfo"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -34.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 34.0
-grow_horizontal = 0
-text = "X"
-
-[node name="TinkerUI" type="Control" parent="UI"]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -119.0
-offset_top = -117.0
-offset_right = 185.0
-offset_bottom = 117.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_qi1ix")
-
-[node name="Default" type="Control" parent="UI/TinkerUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 4.0
-offset_bottom = 36.0
-grow_horizontal = 2
-text = "Tinkerer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 5.0
-offset_top = 28.0
-offset_right = -5.0
-offset_bottom = 32.0
-grow_horizontal = 2
-
-[node name="Top" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 51.0
-offset_top = -59.0
-offset_right = 115.0
-offset_bottom = 5.0
-grow_vertical = 2
-
-[node name="Base" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = 26.0
-offset_right = 116.0
-offset_bottom = 90.0
-grow_vertical = 2
-
-[node name="HSeparator2" type="HSeparator" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = 13.0
-offset_right = 115.0
-offset_bottom = 17.0
-grow_vertical = 2
-
-[node name="Arrow" type="TextureRect" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -14.0
-offset_right = 172.0
-offset_bottom = 186.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("16_5s5o1")
-
-[node name="Output" type="Panel" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 47.0
-offset_top = -23.0
-offset_right = 111.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Build" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 47.0
-offset_top = 42.0
-offset_right = 111.0
-offset_bottom = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 9
-text = "Build"
-
-[node name="MaterialSelection" type="Control" parent="UI/TinkerUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -152.0
-offset_top = -139.0
-offset_right = 151.0
-offset_bottom = -5.0
-grow_horizontal = 2
-
-[node name="Panel" type="Panel" parent="UI/TinkerUI/MaterialSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="UI/TinkerUI/MaterialSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 5
-
 [connection signal="inventory_update" from="Inventory" to="UI/Inventory" method="_on_inventory_update"]
-[connection signal="tab_changed" from="UI/Blueprints/VBoxContainer/TabBar" to="UI/Blueprints" method="_on_tab_bar_tab_changed"]
-[connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
-[connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/Blueprint" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/Blueprint" method="_on_pressed"]
-[connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/1" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
-[connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
-[connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" method="_on_pressed"]
-[connection signal="pressed" from="UI/BlueprintInfo/Button" to="UI/BlueprintInfo" method="_on_button_pressed"]
-[connection signal="pressed" from="UI/BlueprintInfo/Close" to="UI/BlueprintInfo" method="_on_close_pressed"]
-[connection signal="pressed" from="UI/TinkerUI/Default/Top" to="UI/TinkerUI" method="_on_pressed" binds= [true]]
-[connection signal="pressed" from="UI/TinkerUI/Default/Base" to="UI/TinkerUI" method="_on_pressed" binds= [false]]

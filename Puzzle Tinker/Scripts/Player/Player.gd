@@ -10,6 +10,7 @@ var inventory: Inventory
 @onready var sprite_2d = $Sprite2D
 @onready var state_machine = $StateMachine
 
+
 @export var building_state: State
 
 func _ready():
@@ -32,3 +33,4 @@ func start_building(structure: Structure):
 
 func _on_building_place_block(structure):
 	get_tree().get_first_node_in_group("TileMap").place_structure(structure, get_global_mouse_position())
+	

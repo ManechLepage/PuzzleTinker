@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=3 format=3 uid="uid://dbcbfxlk5r5jk"]
+
+[ext_resource type="Resource" uid="uid://kst487i7rgna" path="res://Resources/Items/copper_block.tres" id="1_snrwt"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_ub82m"]
+
+[resource]
+script = ExtResource("1_ub82m")
+item = ExtResource("1_snrwt")
+craft = {}
+quantity = 1
+type = 2

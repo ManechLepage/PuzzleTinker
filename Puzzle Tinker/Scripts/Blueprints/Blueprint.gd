@@ -3,6 +3,7 @@ extends Resource
 
 @export var item: Item
 @export var icon: Texture2D
-@export var craft: Dictionary
+@export var craft: Array[Craft]
 @export var quantity: int
-@export var type: BlueprintManager.BlueprintTypes
+@export var type: BlueprintTypes.BlueprintTypes
+@export var description: StringName

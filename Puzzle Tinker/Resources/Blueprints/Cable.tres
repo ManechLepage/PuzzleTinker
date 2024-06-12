@@ -1,11 +1,21 @@
-[gd_resource type="Resource" script_class="Blueprint" load_steps=3 format=3 uid="uid://c8bt3kr0ee7dr"]
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://c8bt3kr0ee7dr"]
 
+[ext_resource type="Resource" uid="uid://b0ukoln3c511l" path="res://Resources/Items/copper.tres" id="1_1pisj"]
 [ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_48jj7"]
 [ext_resource type="Resource" uid="uid://cyiypdip1t3ww" path="res://Resources/Items/cable.tres" id="1_pvfxd"]
+[ext_resource type="Texture2D" uid="uid://ciwwwrvvijtkx" path="res://Graphics/Items/copper.aseprite" id="1_qhcm7"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_os7ml"]
+
+[sub_resource type="Resource" id="Resource_iobwv"]
+script = ExtResource("2_os7ml")
+item = ExtResource("1_1pisj")
+quantity = 1
 
 [resource]
 script = ExtResource("1_48jj7")
 item = ExtResource("1_pvfxd")
-craft = {}
+icon = ExtResource("1_qhcm7")
+craft = Array[ExtResource("2_os7ml")]([SubResource("Resource_iobwv")])
 quantity = 1
 type = 0
+description = &"Transports electricity through machines"
