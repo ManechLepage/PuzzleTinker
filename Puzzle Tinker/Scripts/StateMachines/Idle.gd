@@ -4,6 +4,7 @@ extends State
 @export var run: State
 @export var fall: State
 @export var mine: State
+@export var in_menu: State
 
 func enter():
 	super()
@@ -17,6 +18,8 @@ func process_inputs(event):
 	if Input.is_action_just_pressed("Left Click"):
 		if can_mine():
 			return mine
+	if Input.is_action_just_pressed("Right Click"):
+		return in_menu
 	return null
 
 func process_physics(delta):

@@ -6,6 +6,7 @@ var has_jumped: bool = false
 var facing_right: bool = true
 var tile_map: TileMap
 var inventory: Inventory
+var current_selected_structure: StructureScene
 
 @onready var sprite_2d = $Sprite2D
 @onready var state_machine = $StateMachine
@@ -33,4 +34,9 @@ func start_building(structure: Structure):
 
 func _on_building_place_block(structure):
 	get_tree().get_first_node_in_group("TileMap").place_structure(structure, get_global_mouse_position())
-	
+
+func set_structure_selection(structure: StructureScene):
+	current_selected_structure = structure
+
+func clear_structure_selection():
+	current_selected_structure = null

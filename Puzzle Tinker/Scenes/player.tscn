@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ptf7ir27qjf2"]
+[gd_scene load_steps=13 format=3 uid="uid://ptf7ir27qjf2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_kr3eo"]
 [ext_resource type="Texture2D" uid="uid://b83bqc6ame1p8" path="res://Graphics/Player/default.aseprite" id="2_012nm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachines/Mine.gd" id="8_xhfc7"]
 [ext_resource type="Resource" uid="uid://b0ukoln3c511l" path="res://Resources/Items/copper.tres" id="9_areoq"]
 [ext_resource type="Script" path="res://Scripts/StateMachines/Building.gd" id="10_naecw"]
+[ext_resource type="Script" path="res://Scripts/StateMachines/InMenu.gd" id="11_psmi2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
 size = Vector2(32, 58)
@@ -30,12 +31,13 @@ shape = SubResource("RectangleShape2D_pp67r")
 script = ExtResource("3_uyyvb")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run", "fall", "mine")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "run", "fall", "mine", "in_menu")]
 script = ExtResource("3_x76ds")
 jump = NodePath("../Jumping")
 run = NodePath("../Running")
 fall = NodePath("../Fall")
 mine = NodePath("../Mine")
+in_menu = NodePath("../InMenu")
 
 [node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "idle", "fall", "mine")]
 script = ExtResource("5_3vnwb")
@@ -79,6 +81,10 @@ script = ExtResource("10_naecw")
 idle = NodePath("../Idle")
 jump = NodePath("../Jumping")
 run = NodePath("../Running")
+
+[node name="InMenu" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle")]
+script = ExtResource("11_psmi2")
+idle = NodePath("../Idle")
 
 [connection signal="timeout" from="StateMachine/Mine/Timer" to="StateMachine/Mine" method="_on_timer_timeout"]
 [connection signal="place_block" from="StateMachine/Building" to="." method="_on_building_place_block"]

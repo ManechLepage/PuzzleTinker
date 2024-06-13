@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dq0dlmq0r070t"]
+[gd_scene load_steps=25 format=3 uid="uid://dq0dlmq0r070t"]
 
 [ext_resource type="PackedScene" uid="uid://ptf7ir27qjf2" path="res://Scenes/player.tscn" id="1_8xhch"]
 [ext_resource type="Texture2D" uid="uid://cjhsraqyiv8xm" path="res://Graphics/TileSet/Stone.aseprite" id="2_075ho"]
@@ -19,10 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://b8o0ts27emqr6" path="res://Scenes/UI/Blueprint/blueprint_tab.tscn" id="12_3erln"]
 [ext_resource type="Script" path="res://Scripts/UI/BlueprintInfo.gd" id="14_2fvga"]
 [ext_resource type="PackedScene" uid="uid://ch55cjpdscx7y" path="res://Scenes/UI/Blueprint/blueprint_craft.tscn" id="15_7y5ws"]
-[ext_resource type="Script" path="res://Scripts/UI/TinkerUI.gd" id="15_qi1ix"]
-[ext_resource type="Texture2D" uid="uid://c468jbf466btk" path="res://Graphics/UI/simple-arrow-sign-png.webp" id="16_5s5o1"]
-[ext_resource type="PackedScene" uid="uid://5uauapypugre" path="res://Scenes/UI/Inventory/item_button.tscn" id="17_expkl"]
-[ext_resource type="Script" path="res://Scripts/UI/TinkerLoadItem.gd" id="17_hwg6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wke8s"]
 texture = ExtResource("2_075ho")
@@ -653,7 +649,7 @@ script = ExtResource("3_8i58g")
 unique_name_in_owner = true
 script = ExtResource("7_q2ywv")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
 script = ExtResource("7_sa86g")
 
 [node name="Inventory" type="Control" parent="UI"]
@@ -913,219 +909,6 @@ offset_bottom = 34.0
 grow_horizontal = 0
 text = "X"
 
-[node name="TinkerUI" type="Control" parent="UI"]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -119.0
-offset_top = -117.0
-offset_right = 185.0
-offset_bottom = 117.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_qi1ix")
-item_button = ExtResource("17_expkl")
-
-[node name="Default" type="Control" parent="UI/TinkerUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 4.0
-offset_bottom = 36.0
-grow_horizontal = 2
-text = "Tinkerer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 5.0
-offset_top = 28.0
-offset_right = -5.0
-offset_bottom = 32.0
-grow_horizontal = 2
-
-[node name="Top" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 51.0
-offset_top = -59.0
-offset_right = 115.0
-offset_bottom = 5.0
-grow_vertical = 2
-script = ExtResource("17_hwg6o")
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Top"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Base" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = 26.0
-offset_right = 116.0
-offset_bottom = 90.0
-grow_vertical = 2
-script = ExtResource("17_hwg6o")
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Base"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = 13.0
-offset_right = 115.0
-offset_bottom = 17.0
-grow_vertical = 2
-
-[node name="Arrow" type="TextureRect" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -14.0
-offset_right = 172.0
-offset_bottom = 186.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("16_5s5o1")
-
-[node name="Output" type="TextureRect" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 47.0
-offset_top = -23.0
-offset_right = 111.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Output"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Build" type="Button" parent="UI/TinkerUI/Default"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 47.0
-offset_top = 42.0
-offset_right = 111.0
-offset_bottom = 63.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 9
-text = "Build"
-
-[node name="MaterialSelection" type="Control" parent="UI/TinkerUI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -144.0
-offset_top = -150.0
-offset_right = 145.0
-offset_bottom = -4.0
-grow_horizontal = 2
-
-[node name="Panel" type="Panel" parent="UI/TinkerUI/MaterialSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="UI/TinkerUI/MaterialSelection"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 11.0
-offset_right = -15.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 4
-
-[node name="Clear" type="Button" parent="UI/TinkerUI/MaterialSelection/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/TinkerUI/MaterialSelection/GridContainer/Clear"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Clear"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="inventory_update" from="Inventory" to="UI/Inventory" method="_on_inventory_update"]
 [connection signal="tab_changed" from="UI/Blueprints/VBoxContainer/TabBar" to="UI/Blueprints" method="_on_tab_bar_tab_changed"]
 [connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
@@ -1135,7 +918,3 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" method="_on_pressed"]
 [connection signal="pressed" from="UI/BlueprintInfo/Button" to="UI/BlueprintInfo" method="_on_button_pressed"]
 [connection signal="pressed" from="UI/BlueprintInfo/Close" to="UI/BlueprintInfo" method="_on_close_pressed"]
-[connection signal="pressed" from="UI/TinkerUI/Default/Top" to="UI/TinkerUI" method="_on_pressed" binds= [true]]
-[connection signal="pressed" from="UI/TinkerUI/Default/Base" to="UI/TinkerUI" method="_on_pressed" binds= [false]]
-[connection signal="pressed" from="UI/TinkerUI/Default/Build" to="UI/TinkerUI" method="_on_build_pressed"]
-[connection signal="pressed" from="UI/TinkerUI/MaterialSelection/GridContainer/Clear" to="UI/TinkerUI" method="_on_clear_pressed"]

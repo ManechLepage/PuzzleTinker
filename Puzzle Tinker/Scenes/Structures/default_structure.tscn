@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5ag4v3wkpftu"]
+[gd_scene load_steps=7 format=3 uid="uid://b5ag4v3wkpftu"]
 
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_r7ie7"]
 [ext_resource type="Texture2D" uid="uid://ciwwwrvvijtkx" path="res://Graphics/Items/copper.aseprite" id="1_y3ay5"]
+[ext_resource type="Script" path="res://Scripts/Structures/Selectable.gd" id="3_ufyj8"]
+[ext_resource type="PackedScene" uid="uid://bf57nspdjc6pp" path="res://Scenes/UI/Structures/tinker_ui.tscn" id="4_w8mbe"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_veiht"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7555d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -13,6 +16,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Structure" type="AnimatedSprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqadk"]
+size = Vector2(22, 19)
+
+[node name="Structure" type="Node2D"]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_veiht")
+script = ExtResource("1_r7ie7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7555d")
+
+[node name="Selectable" type="Node2D" parent="."]
+script = ExtResource("3_ufyj8")
+UI = ExtResource("4_w8mbe")
+
+[node name="Area2D" type="Area2D" parent="Selectable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selectable/Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_pqadk")
+
+[connection signal="mouse_entered" from="Selectable/Area2D" to="Selectable" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Selectable/Area2D" to="Selectable" method="_on_area_2d_mouse_exited"]

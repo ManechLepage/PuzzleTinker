@@ -17,10 +17,6 @@ func _ready():
 	inventory = get_tree().get_first_node_in_group("Inventory")
 	tinkering_recipes = get_tree().get_first_node_in_group("TinkeringRecipes")
 
-func _input(event):
-	if Input.is_action_just_pressed("Test1"):
-		visible = !visible
-
 func _on_pressed(is_top):
 	if current_selection == is_top and material_selection.visible:
 		material_selection.visible = false
@@ -73,7 +69,7 @@ func _on_build_pressed():
 	inventory.add_item(current_recipe.top, -1)
 	inventory.add_item(current_recipe.output, 1)
 	
-	material_selection.visible = false
+	queue_free()
 
 
 func _on_clear_pressed():
