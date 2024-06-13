@@ -3,3 +3,4 @@ extends Resource
 
 @export var name: StringName
 @export var icon: Texture2D
+@export var tinker_type: TinkerType.type

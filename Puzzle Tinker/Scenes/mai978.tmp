@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dq0dlmq0r070t"]
+[gd_scene load_steps=22 format=3 uid="uid://dq0dlmq0r070t"]
 
 [ext_resource type="PackedScene" uid="uid://ptf7ir27qjf2" path="res://Scenes/player.tscn" id="1_8xhch"]
 [ext_resource type="Texture2D" uid="uid://cjhsraqyiv8xm" path="res://Graphics/TileSet/Stone.aseprite" id="2_075ho"]
@@ -7,14 +7,9 @@
 [ext_resource type="Script" path="res://Scripts/TileMap.gd" id="4_naomi"]
 [ext_resource type="PackedScene" uid="uid://dko2d6htfytjo" path="res://Scenes/UI/Inventory/item_preview.tscn" id="4_nxub5"]
 [ext_resource type="Script" path="res://Scripts/Inventory/InventoryUI.gd" id="4_ok1e3"]
-[ext_resource type="Script" path="res://Scripts/Blueprints/TinkeringRecipes.gd" id="5_clokr"]
-[ext_resource type="Resource" uid="uid://cyiypdip1t3ww" path="res://Resources/Items/cable.tres" id="6_3sjuo"]
-[ext_resource type="Script" path="res://Scripts/Blueprints/TinkerCraft.gd" id="6_58wj8"]
-[ext_resource type="Resource" uid="uid://kst487i7rgna" path="res://Resources/Items/copper_block.tres" id="7_eq2y5"]
 [ext_resource type="Script" path="res://Scripts/Blueprints/BlueprintManager.gd" id="7_q2ywv"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="7_sa86g"]
 [ext_resource type="PackedScene" uid="uid://cbesap8j4ifi" path="res://Scenes/UI/Inventory/structure_preview.tscn" id="7_vks8e"]
-[ext_resource type="Resource" uid="uid://b0ukoln3c511l" path="res://Resources/Items/copper.tres" id="9_c4qp7"]
 [ext_resource type="Script" path="res://Scripts/UI/BlueprintUI.gd" id="11_fjju1"]
 [ext_resource type="PackedScene" uid="uid://b8o0ts27emqr6" path="res://Scenes/UI/Blueprint/blueprint_tab.tscn" id="12_3erln"]
 [ext_resource type="Script" path="res://Scripts/UI/BlueprintInfo.gd" id="14_2fvga"]
@@ -22,7 +17,6 @@
 [ext_resource type="Script" path="res://Scripts/UI/TinkerUI.gd" id="15_qi1ix"]
 [ext_resource type="Texture2D" uid="uid://c468jbf466btk" path="res://Graphics/UI/simple-arrow-sign-png.webp" id="16_5s5o1"]
 [ext_resource type="PackedScene" uid="uid://5uauapypugre" path="res://Scenes/UI/Inventory/item_button.tscn" id="17_expkl"]
-[ext_resource type="Script" path="res://Scripts/UI/TinkerLoadItem.gd" id="17_hwg6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wke8s"]
 texture = ExtResource("2_075ho")
@@ -612,12 +606,6 @@ custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_wke8s")
 sources/1 = SubResource("TileSetScenesCollectionSource_avbj1")
 
-[sub_resource type="Resource" id="Resource_asaps"]
-script = ExtResource("6_58wj8")
-top = ExtResource("9_c4qp7")
-base = ExtResource("6_3sjuo")
-output = ExtResource("7_eq2y5")
-
 [sub_resource type="LabelSettings" id="LabelSettings_ppax2"]
 
 [node name="Main" type="Node2D"]
@@ -639,11 +627,6 @@ layer_0/tile_data = PackedInt32Array(327671, 65536, 0, 327672, 65536, 0, 327673,
 layer_1/name = "Structures"
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("4_naomi")
-
-[node name="TinkeringRecipes" type="Node" parent="." groups=["TinkeringRecipes"]]
-unique_name_in_owner = true
-script = ExtResource("5_clokr")
-data = Array[ExtResource("6_58wj8")]([SubResource("Resource_asaps")])
 
 [node name="Inventory" type="Node" parent="." groups=["Inventory"]]
 unique_name_in_owner = true
@@ -977,17 +960,6 @@ offset_top = -59.0
 offset_right = 115.0
 offset_bottom = 5.0
 grow_vertical = 2
-script = ExtResource("17_hwg6o")
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Top"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Base" type="Button" parent="UI/TinkerUI/Default"]
 layout_mode = 1
@@ -999,17 +971,6 @@ offset_top = 26.0
 offset_right = 116.0
 offset_bottom = 90.0
 grow_vertical = 2
-script = ExtResource("17_hwg6o")
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Base"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="UI/TinkerUI/Default"]
 layout_mode = 1
@@ -1038,7 +999,7 @@ grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("16_5s5o1")
 
-[node name="Output" type="TextureRect" parent="UI/TinkerUI/Default"]
+[node name="Output" type="Panel" parent="UI/TinkerUI/Default"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1051,16 +1012,6 @@ offset_right = 111.0
 offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="UI/TinkerUI/Default/Output"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Build" type="Button" parent="UI/TinkerUI/Default"]
 layout_mode = 1
@@ -1111,21 +1062,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 4
 
-[node name="Clear" type="Button" parent="UI/TinkerUI/MaterialSelection/GridContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/TinkerUI/MaterialSelection/GridContainer/Clear"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Clear"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="inventory_update" from="Inventory" to="UI/Inventory" method="_on_inventory_update"]
 [connection signal="tab_changed" from="UI/Blueprints/VBoxContainer/TabBar" to="UI/Blueprints" method="_on_tab_bar_tab_changed"]
 [connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
@@ -1137,5 +1073,3 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/BlueprintInfo/Close" to="UI/BlueprintInfo" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/TinkerUI/Default/Top" to="UI/TinkerUI" method="_on_pressed" binds= [true]]
 [connection signal="pressed" from="UI/TinkerUI/Default/Base" to="UI/TinkerUI" method="_on_pressed" binds= [false]]
-[connection signal="pressed" from="UI/TinkerUI/Default/Build" to="UI/TinkerUI" method="_on_build_pressed"]
-[connection signal="pressed" from="UI/TinkerUI/MaterialSelection/GridContainer/Clear" to="UI/TinkerUI" method="_on_clear_pressed"]

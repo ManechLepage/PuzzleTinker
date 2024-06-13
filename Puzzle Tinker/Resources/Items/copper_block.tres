@@ -8,3 +8,4 @@ script = ExtResource("2_8e0s7")
 structure_id = 1
 name = &"Copper Block"
 icon = ExtResource("1_udcip")
+tinker_type = 0

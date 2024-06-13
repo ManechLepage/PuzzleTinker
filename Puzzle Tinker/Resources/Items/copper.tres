@@ -7,3 +7,4 @@
 script = ExtResource("1_qpxef")
 name = &"Copper"
 icon = ExtResource("1_5srsa")
+tinker_type = 2

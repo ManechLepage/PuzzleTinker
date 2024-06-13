@@ -8,3 +8,4 @@ script = ExtResource("1_hkm84")
 structure_id = 1
 name = &"Cable"
 icon = ExtResource("1_jhvdc")
+tinker_type = 1
