@@ -7,6 +7,8 @@ var inventory: Inventory
 var tinkering_recipes: TinkeringRecipes
 var current_selection = null
 var current_recipe: TinkerCraft
+var player: Player
+
 
 @onready var top = $Default/Top
 @onready var base = $Default/Base
@@ -16,6 +18,7 @@ var current_recipe: TinkerCraft
 func _ready():
 	inventory = get_tree().get_first_node_in_group("Inventory")
 	tinkering_recipes = get_tree().get_first_node_in_group("TinkeringRecipes")
+	player = get_tree().get_first_node_in_group("Player")
 
 func _on_pressed(is_top):
 	if current_selection == is_top and material_selection.visible:
@@ -58,7 +61,6 @@ func update_output():
 	
 	build.disabled = !can_craft
 
-
 func _on_build_pressed():
 	top.clear()
 	base.clear()
@@ -69,7 +71,7 @@ func _on_build_pressed():
 	inventory.add_item(current_recipe.top, -1)
 	inventory.add_item(current_recipe.output, 1)
 	
-	queue_free()
+	player.remove_structure_ui()
 
 
 func _on_clear_pressed():

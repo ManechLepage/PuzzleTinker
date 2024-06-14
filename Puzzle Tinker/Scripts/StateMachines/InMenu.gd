@@ -15,7 +15,8 @@ func enter():
 
 func exit():
 	super()
-	structure.disable_ui()
+	if structure:
+		structure.disable_ui()
 
 func process_frames(delta):
 	if is_idle:
@@ -26,3 +27,7 @@ func process_inputs(event):
 	if Input.is_action_just_pressed("Escape"):
 		return idle
 	return null
+
+
+func _on_player_update_structure_menu():
+	is_idle = true
