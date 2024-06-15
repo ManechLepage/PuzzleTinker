@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo3gxklth4glm"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Components/cable_piece.gd" id="1_umv8h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jqtc5"]
+radius = 2.0
+height = 6.0
+
+[node name="CablePiece" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+mass = 10.0
+gravity_scale = 0.5
+linear_damp = 20.0
+script = ExtResource("1_umv8h")
+
+[node name="C" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_jqtc5")
+
+[node name="J" type="PinJoint2D" parent="C"]
+position = Vector2(0, 3)
+bias = 0.9

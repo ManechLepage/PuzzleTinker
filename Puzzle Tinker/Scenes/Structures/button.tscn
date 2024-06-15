@@ -13,7 +13,7 @@ shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
 shader_parameter/tint_factor = 0.0
 shader_parameter/fade = 1.0
 
-[node name="Structure" type="Node2D"]
+[node name="Button" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_t3sfn")
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://comep6h52w1ys"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_k87q5"]
+[ext_resource type="PackedScene" uid="uid://snogh8kpgb5s" path="res://Scenes/Structures/Components/cable_anchor.tscn" id="2_4gh1a"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/CableComponent.gd" id="2_waux7"]
+[ext_resource type="PackedScene" uid="uid://bo3gxklth4glm" path="res://Scenes/Structures/Components/cable_piece.tscn" id="3_nkm0x"]
+
+[node name="Cable" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_k87q5")
+
+[node name="StartAnchor" parent="." instance=ExtResource("2_4gh1a")]
+
+[node name="EndAnchor" parent="." instance=ExtResource("2_4gh1a")]
+
+[node name="CableComponent" type="Node2D" parent="."]
+script = ExtResource("2_waux7")
+cable_piece = ExtResource("3_nkm0x")
