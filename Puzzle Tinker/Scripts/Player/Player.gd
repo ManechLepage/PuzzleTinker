@@ -8,6 +8,8 @@ var tile_map: TileMap
 var inventory: Inventory
 var current_selected_structure: StructureScene
 
+@export var is_in_menu: State
+
 signal update_structure_menu
 
 @onready var sprite_2d = $Sprite2D
@@ -34,12 +36,8 @@ func start_building(structure: Structure):
 	building_state.currently_placing = structure
 	state_machine.change_state(building_state)
 
-func _on_building_place_block(structure, placeholder_pos):
-	if placeholder_pos:
-		tile_map.place_structure(structure, placeholder_pos, true)
-		tile_map.remove_structure(placeholder_pos)
-	else:
-		tile_map.place_structure(structure, get_global_mouse_position(), false)
+func _on_building_place_block(structure):
+	tile_map.place_structure(structure, get_global_mouse_position())
 
 func set_structure_selection(structure: StructureScene):
 	current_selected_structure = structure
@@ -48,4 +46,11 @@ func clear_structure_selection():
 	current_selected_structure = null
 
 func remove_structure_ui():
-	state_machine.current_state.is_idle = true
+	if state_machine.current_state == is_in_menu:
+		state_machine.current_state.is_idle = true
+
+func _on_building_initialize_placeholder(structure):
+	tile_map.create_placeholder(structure)
+
+func remove_placeholder():
+	tile_map.clear_placeholder()

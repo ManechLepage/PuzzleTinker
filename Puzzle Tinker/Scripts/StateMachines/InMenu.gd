@@ -10,13 +10,13 @@ func enter():
 	if parent.current_selected_structure == null:
 		is_idle = true
 	else:
-		parent.current_selected_structure.enable_ui()
+		parent.current_selected_structure.enable()
 	structure = parent.current_selected_structure
 
 func exit():
 	super()
 	if structure:
-		structure.disable_ui()
+		structure.disable()
 
 func process_frames(delta):
 	if is_idle:
@@ -27,7 +27,6 @@ func process_inputs(event):
 	if Input.is_action_just_pressed("Escape"):
 		return idle
 	return null
-
 
 func _on_player_update_structure_menu():
 	is_idle = true

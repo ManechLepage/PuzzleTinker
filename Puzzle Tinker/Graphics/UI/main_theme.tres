@@ -1,0 +1,30 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dn0r3m0c3h4xj"]
+
+[ext_resource type="Texture2D" uid="uid://dqkx2nyg3dunl" path="res://Graphics/UI/default_panel.aseprite" id="1_4uwix"]
+[ext_resource type="FontFile" uid="uid://bhp5f4318nagl" path="res://Graphics/UI/upheavtt.ttf" id="1_81cf5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3a5b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4udft"]
+texture = ExtResource("1_4uwix")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[resource]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_81cf5")
+Label/styles/normal = SubResource("StyleBoxEmpty_q3a5b")
+Panel/styles/panel = SubResource("StyleBoxTexture_4udft")
+TabBar/fonts/font = ExtResource("1_81cf5")
