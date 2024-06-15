@@ -1,65 +1,98 @@
 extends Node2D
 
-var piece_length: float = 4.0
-var cable_parts: Array
-var cable_close_tolerance = 4.0
-var cable_points: Array
 
-@onready var start_anchor = $"../StartAnchor"
-@onready var end_anchor = $"../EndAnchor"
+@export var ropeLength: float = 30
+@export var constrain: float = 1
+@export var gravity: Vector2 = Vector2(0,9.8)
+@export var dampening: float = 0.9
+@export var startPin: bool = true
+@export var endPin: bool = true
 
-@onready var start_joint: PinJoint2D = start_anchor.get_node("C/J")
-@onready var end_joint: PinJoint2D = end_anchor.get_node("C/J")
+@onready var line_2d = $"../Line2D"
 
-@export var cable_piece: PackedScene
+var pos: Array
+var posPrev: Array
+var pointCount: int
 
-func _process(delta):
-	get_points()
-	queue_redraw()
+func _ready()->void:
+	pointCount = get_pointCount(ropeLength)
+	resize_arrays()
+	init_position()
 
-func spawn_cable(starting_position: Vector2, end_position: Vector2):
-	start_anchor.global_position = starting_position
-	end_anchor.global_position = end_position
+func get_pointCount(distance: float)->int:
+	return int(ceil(distance / constrain))
+
+func resize_arrays():
+	pos.resize(pointCount)
+	posPrev.resize(pointCount)
+
+func init_position()->void:
+	for i in range(pointCount):
+		pos[i] = position + Vector2(constrain *i, 0)
+		posPrev[i] = position + Vector2(constrain *i, 0)
+	position = Vector2.ZERO
+
+func _unhandled_input(event:InputEvent)->void:
+	if event is InputEventMouseMotion:
+		if Input.is_action_pressed("Left Click"):
+			set_start(get_global_mouse_position())
+		if Input.is_action_pressed("Right Click"):
+			set_last(get_global_mouse_position())
+	elif event is InputEventMouseButton && event.is_pressed():
+		if event.button_index == 1:
+			set_start(get_global_mouse_position())
+		elif event.button_index == 2:
+			set_last(get_global_mouse_position())
+
+func _process(delta)->void:
+	update_points(delta)
+	update_constrain()
 	
-	var distance = starting_position.distance_to(end_position)
-	var segment_amount = round(distance / piece_length)
-	var spawn_angle = (end_position - starting_position).angle() - PI/2
+	#update_constrain()	#Repeat to get tighter rope
+	#update_constrain()
 	
-	create_cable(segment_amount, start_anchor, end_position, spawn_angle)
+	# Send positions to Line2D for drawing
+	line_2d.points = pos
 
-func create_cable(segment_amount, parent, end_position, spawn_angle):
-	for i in segment_amount:
-		parent = add_piece(parent, i, spawn_angle)
-		parent.name = str(i)
-		cable_parts.append(parent)
+func set_start(p:Vector2)->void:
+	pos[0] = p
+	posPrev[0] = p
+
+func set_last(p:Vector2)->void:
+	pos[pointCount-1] = p
+	posPrev[pointCount-1] = p
+
+func update_points(delta)->void:
+	for i in range (pointCount):
+		# not first and last || first if not pinned || last if not pinned
+		if (i!=0 && i!=pointCount-1) || (i==0 && !startPin) || (i==pointCount-1 && !endPin):
+			var velocity = (pos[i] -posPrev[i]) * dampening
+			posPrev[i] = pos[i]
+			pos[i] += velocity + (gravity * delta)
+
+func update_constrain()->void:
+	for i in range(pointCount):
+		if i == pointCount-1:
+			return
+		var distance = pos[i].distance_to(pos[i+1])
+		var difference = constrain - distance
+		var percent = difference / distance
+		var vec2 = pos[i+1] - pos[i]
 		
-		var joint_position = parent.get_node("C/J").global_position
-		if joint_position.distance_to(end_position) < cable_close_tolerance:
-			break
-	
-	end_joint.node_a = end_anchor.get_path()
-	end_joint.node_a = cable_parts[-1].get_path()
-
-func add_piece(parent, id, spawn_angle):
-	var joint: PinJoint2D = parent.get_node("C/J")
-	var piece: Object = cable_piece.instantiate()
-	piece.global_position = joint.global_position
-	piece.rotation = spawn_angle
-	piece.parent = self
-	piece.id = id
-	add_child(piece)
-	joint.node_a = parent.get_path()
-	joint.node_b = piece.get_path()
-	
-	return piece
-
-func get_points():
-	cable_points.clear()
-	
-	cable_points.append(start_joint.global_position)
-	for c in cable_parts:
-		cable_points.append(c.global_position)
-	cable_points.append(end_joint.global_position)
-
-func _draw():
-	draw_polyline(cable_points, Color.AQUAMARINE)
+		# if first point
+		if i == 0:
+			if startPin:
+				pos[i+1] += vec2 * percent
+			else:
+				pos[i] -= vec2 * (percent/2)
+				pos[i+1] += vec2 * (percent/2)
+		# if last point, skip because no more points after it
+		elif i == pointCount-1:
+			pass
+		# all the rest
+		else:
+			if i+1 == pointCount-1 && endPin:
+				pos[i] -= vec2 * percent
+			else:
+				pos[i] -= vec2 * (percent/2)
+				pos[i+1] += vec2 * (percent/2)
