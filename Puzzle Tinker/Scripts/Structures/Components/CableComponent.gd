@@ -1,6 +1,15 @@
+@tool
 extends Node2D
 
+@onready var start = $"../Start"
+@onready var last = $"../Last"
 
+@export_category("Colors")
+@export var default_color: Color
+@export var error_color: Color
+
+@export_category("Cable Settings")
+@export var max_cable_size: float = 40.0
 @export var ropeLength: float = 30
 @export var constrain: float = 1
 @export var gravity: Vector2 = Vector2(0,9.8)
@@ -9,68 +18,71 @@ extends Node2D
 @export var endPin: bool = true
 
 @onready var line_2d = $"../Line2D"
+@onready var path_2d = $"../Path2D"
 
 var pos: Array
 var posPrev: Array
 var pointCount: int
+var can_be_placed: int
 
-func _ready()->void:
+var tile_map: TileMap
+
+var is_in_range: bool = true
+
+func _ready():
+	line_2d.default_color = default_color
 	pointCount = get_pointCount(ropeLength)
 	resize_arrays()
 	init_position()
+	tile_map = get_tree().get_first_node_in_group("TileMap")
 
-func get_pointCount(distance: float)->int:
+func get_pointCount(distance: float):
 	return int(ceil(distance / constrain))
 
 func resize_arrays():
 	pos.resize(pointCount)
 	posPrev.resize(pointCount)
 
-func init_position()->void:
+func init_position():
 	for i in range(pointCount):
 		pos[i] = position + Vector2(constrain *i, 0)
 		posPrev[i] = position + Vector2(constrain *i, 0)
 	position = Vector2.ZERO
+	start.position = position
+	last.position = position
 
-func _unhandled_input(event:InputEvent)->void:
-	if event is InputEventMouseMotion:
-		if Input.is_action_pressed("Left Click"):
-			set_start(get_global_mouse_position())
-		if Input.is_action_pressed("Right Click"):
-			set_last(get_global_mouse_position())
-	elif event is InputEventMouseButton && event.is_pressed():
-		if event.button_index == 1:
-			set_start(get_global_mouse_position())
-		elif event.button_index == 2:
-			set_last(get_global_mouse_position())
-
-func _process(delta)->void:
+func _process(delta):
+	set_start(start.position)
+	set_last(last.position)
+	
 	update_points(delta)
 	update_constrain()
-	
-	#update_constrain()	#Repeat to get tighter rope
-	#update_constrain()
-	
-	# Send positions to Line2D for drawing
 	line_2d.points = pos
+	path_2d.curve.clear_points()
+	
+	if not Engine.is_editor_hint():
+		if get_parent().editing:
+			if start.global_position.distance_to(get_global_mouse_position()) > max_cable_size:
+				is_in_range = false
+			else:
+				is_in_range = true
 
-func set_start(p:Vector2)->void:
+func set_start(p:Vector2):
 	pos[0] = p
 	posPrev[0] = p
 
-func set_last(p:Vector2)->void:
+func set_last(p:Vector2):
 	pos[pointCount-1] = p
 	posPrev[pointCount-1] = p
 
-func update_points(delta)->void:
+func update_points(delta):
 	for i in range (pointCount):
-		# not first and last || first if not pinned || last if not pinned
 		if (i!=0 && i!=pointCount-1) || (i==0 && !startPin) || (i==pointCount-1 && !endPin):
 			var velocity = (pos[i] -posPrev[i]) * dampening
 			posPrev[i] = pos[i]
 			pos[i] += velocity + (gravity * delta)
 
-func update_constrain()->void:
+func update_constrain():
 	for i in range(pointCount):
 		if i == pointCount-1:
 			return
@@ -79,17 +91,14 @@ func update_constrain()->void:
 		var percent = difference / distance
 		var vec2 = pos[i+1] - pos[i]
 		
-		# if first point
 		if i == 0:
 			if startPin:
 				pos[i+1] += vec2 * percent
 			else:
 				pos[i] -= vec2 * (percent/2)
 				pos[i+1] += vec2 * (percent/2)
-		# if last point, skip because no more points after it
 		elif i == pointCount-1:
 			pass
-		# all the rest
 		else:
 			if i+1 == pointCount-1 && endPin:
 				pos[i] -= vec2 * percent

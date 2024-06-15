@@ -54,3 +54,9 @@ func _on_building_initialize_placeholder(structure):
 
 func remove_placeholder():
 	tile_map.clear_placeholder()
+
+func _on_building_place_cable(cable):
+	tile_map.create_placeholder(cable)
+
+func _on_building_finish_cable_placing():
+	tile_map.finish_cable_placing()

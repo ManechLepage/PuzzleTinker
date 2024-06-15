@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dnbprc0b5j5xi"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_mu2xf"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_xeob4"]
+[ext_resource type="Texture2D" uid="uid://ba6chjodbawut" path="res://Graphics/Structures/pole_top.aseprite" id="3_ly840"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/Selectable.gd" id="4_bpcqk"]
+[ext_resource type="PackedScene" uid="uid://yqqosivmew03" path="res://Scenes/Structures/Components/placeholder.tscn" id="5_pblrq"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/ConnectToGround.gd" id="6_vq61x"]
+[ext_resource type="PackedScene" uid="uid://brq84r0ghly2" path="res://Scenes/Structures/Components/pole_middle.tscn" id="7_iqx3m"]
+[ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="8_3k12l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
+resource_local_to_scene = true
+shader = ExtResource("2_xeob4")
+shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
+shader_parameter/tint_factor = 0.0
+shader_parameter/fade = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7555d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ly840")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqadk"]
+size = Vector2(12, 16)
+
+[node name="Pole" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_mu2xf")
+connect_to_ground = true
+has_power = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_kl174")
+sprite_frames = SubResource("SpriteFrames_7555d")
+
+[node name="Selectable" type="Node2D" parent="."]
+script = ExtResource("4_bpcqk")
+
+[node name="Area2D" type="Area2D" parent="Selectable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selectable/Area2D"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_pqadk")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Placeholder" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_pblrq")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ConnectToGround" type="Node2D" parent="." groups=["ConnectToGround"]]
+script = ExtResource("6_vq61x")
+middle = ExtResource("7_iqx3m")
+
+[node name="PowerPosition" parent="." instance=ExtResource("8_3k12l")]
+position = Vector2(0, 7)
+
+[connection signal="mouse_entered" from="Selectable/Area2D" to="Selectable" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Selectable/Area2D" to="Selectable" method="_on_area_2d_mouse_exited"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtcao46qonphn"]
+[gd_scene load_steps=8 format=3 uid="uid://dtcao46qonphn"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_t3sfn"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_smpil"]
 [ext_resource type="SpriteFrames" uid="uid://b0ul47olsu42f" path="res://Graphics/Structures/button.aseprite" id="3_cp0db"]
 [ext_resource type="PackedScene" uid="uid://ccv580v1uca8a" path="res://Scenes/Structures/Components/selectable.tscn" id="4_2s42x"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/PowerButton.gd" id="5_xyiq0"]
+[ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="6_4ktye"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
 resource_local_to_scene = true
@@ -16,6 +17,7 @@ shader_parameter/fade = 1.0
 [node name="Button" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_t3sfn")
+has_power = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_kl174")
@@ -27,11 +29,16 @@ frame_progress = 0.671217
 [node name="Area2D" parent="Selectable" index="0"]
 visible = true
 
+[node name="CollisionShape2D" parent="Selectable/Area2D" index="0"]
+debug_color = Color(0, 0.6, 0.701961, 0)
+
 [node name="PowerButton" type="Node" parent="."]
 script = ExtResource("5_xyiq0")
 
 [node name="Timer" type="Timer" parent="PowerButton"]
 wait_time = 0.7
+
+[node name="PowerPosition" parent="." instance=ExtResource("6_4ktye")]
 
 [connection signal="disabled" from="." to="PowerButton" method="_disabled"]
 [connection signal="enabled" from="." to="PowerButton" method="_enabled"]

@@ -1,16 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://comep6h52w1ys"]
+[gd_scene load_steps=6 format=3 uid="uid://comep6h52w1ys"]
 
-[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_k87q5"]
+[ext_resource type="Script" path="res://Scripts/Structures/Cable.gd" id="1_mpvm7"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/CableComponent.gd" id="2_waux7"]
+
+[sub_resource type="Animation" id="Animation_f02td"]
+resource_name = "PowerAnimation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dvwjh"]
+_data = {
+"PowerAnimation": SubResource("Animation_f02td")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_3kbw3"]
 
 [node name="Cable" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_k87q5")
+script = ExtResource("1_mpvm7")
+placeholder = false
 
 [node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-17, 0, -15.2195, 6.64937, -13.4149, 12.2959, -11.575, 16.933, -9.68863, 20.5606, -7.73145, 23.1639, -5.66496, 24.6946, -3.44366, 25.0443, -1.12145, 24.0222, 1.09632, 21.6134, 3.16114, 17.9559, 5.1084, 13.2226, 6.98711, 7.45766, 8.82052, 0.6766, 9, 0)
+width = 1.0
+default_color = Color(0.802397, 0.516804, 0.173884, 1)
+sharp_limit = 0.0
+round_precision = 1
+
+[node name="Last" type="Node2D" parent="."]
+position = Vector2(9, 0)
+
+[node name="Start" type="Node2D" parent="."]
+position = Vector2(-17, 0)
 
 [node name="CableComponent" type="Node2D" parent="."]
 script = ExtResource("2_waux7")
+default_color = Color(0.802397, 0.516804, 0.173884, 1)
+error_color = Color(0.697715, 0.210985, 0.118182, 1)
+max_cable_size = 175.0
+ropeLength = 10.0
 constrain = 0.7
 gravity = Vector2(0, 30)
 dampening = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Path2D")
+libraries = {
+"": SubResource("AnimationLibrary_dvwjh")
+}
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3kbw3")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-4.76837e-07, 0)
+rotation = 1.05841

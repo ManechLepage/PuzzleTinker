@@ -36,8 +36,9 @@ script = ExtResource("1_r7ie7")
 material = SubResource("ShaderMaterial_kl174")
 sprite_frames = SubResource("SpriteFrames_7555d")
 
-[node name="Selectable" type="Node2D" parent="."]
+[node name="Selectable" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_jl6kt")
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="Area2D" type="Area2D" parent="Selectable"]
 

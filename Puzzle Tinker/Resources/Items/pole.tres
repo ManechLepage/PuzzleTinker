@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://byjm0mx16acxe"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_56h15"]
+[ext_resource type="Texture2D" uid="uid://ba6chjodbawut" path="res://Graphics/Structures/pole_top.aseprite" id="1_odowd"]
+
+[resource]
+script = ExtResource("1_56h15")
+structure_id = 3
+name = &"Pole"
+icon = ExtResource("1_odowd")
+tinker_type = 0

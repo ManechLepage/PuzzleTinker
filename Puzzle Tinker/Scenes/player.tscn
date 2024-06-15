@@ -88,5 +88,7 @@ script = ExtResource("11_psmi2")
 idle = NodePath("../Idle")
 
 [connection signal="timeout" from="StateMachine/Mine/Timer" to="StateMachine/Mine" method="_on_timer_timeout"]
+[connection signal="finish_cable_placing" from="StateMachine/Building" to="." method="_on_building_finish_cable_placing"]
 [connection signal="initialize_placeholder" from="StateMachine/Building" to="." method="_on_building_initialize_placeholder"]
 [connection signal="place_block" from="StateMachine/Building" to="." method="_on_building_place_block"]
+[connection signal="place_cable" from="StateMachine/Building" to="." method="_on_building_place_cable"]
