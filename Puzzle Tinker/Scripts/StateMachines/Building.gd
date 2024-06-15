@@ -22,6 +22,7 @@ func enter():
 
 func exit():
 	if currently_placing.structure_id == 0:
+		click = 0
 		finish_cable_placing.emit()
 	else:
 		parent.remove_placeholder()

@@ -31,17 +31,15 @@ script = ExtResource("1_mpvm7")
 placeholder = false
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(-17, 0, -15.2195, 6.64937, -13.4149, 12.2959, -11.575, 16.933, -9.68863, 20.5606, -7.73145, 23.1639, -5.66496, 24.6946, -3.44366, 25.0443, -1.12145, 24.0222, 1.09632, 21.6134, 3.16114, 17.9559, 5.1084, 13.2226, 6.98711, 7.45766, 8.82052, 0.6766, 9, 0)
+points = PackedVector2Array(0, 0, 0.00345216, 6.48063, 0.00650959, 12.0049, 0.00916685, 16.5719, 0.0113822, 20.1772, 0.0131495, 22.8185, 0.0142723, 24.4868, 0.0144114, 25.177, -0.00828329, 23.5176, -0.00715577, 20.8721, -0.00562382, 17.2673, -0.00386927, 12.7035, -0.00202012, 7.18089, -0.00019335, 0.7, 0, 0)
 width = 1.0
 default_color = Color(0.802397, 0.516804, 0.173884, 1)
 sharp_limit = 0.0
 round_precision = 1
 
 [node name="Last" type="Node2D" parent="."]
-position = Vector2(9, 0)
 
 [node name="Start" type="Node2D" parent="."]
-position = Vector2(-17, 0)
 
 [node name="CableComponent" type="Node2D" parent="."]
 script = ExtResource("2_waux7")

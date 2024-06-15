@@ -920,11 +920,13 @@ offset_bottom = 34.0
 grow_horizontal = 0
 text = "X"
 
+[connection signal="disabled" from="TileMap/Button" to="TileMap/Button/PowerButton" method="_disabled"]
+[connection signal="enabled" from="TileMap/Button" to="TileMap/Button/PowerButton" method="_enabled"]
 [connection signal="inventory_update" from="Inventory" to="UI/Inventory" method="_on_inventory_update"]
 [connection signal="tab_changed" from="UI/Blueprints/VBoxContainer/TabBar" to="UI/Blueprints" method="_on_tab_bar_tab_changed"]
 [connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
 [connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/Blueprint" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/Blueprint" method="_on_pressed"]
-[connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/@Button@289577" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/@Button@289577" method="_on_pressed"]
+[connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/@Button@30335" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0/@Button@30335" method="_on_pressed"]
 [connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/1" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
 [connection signal="load_new_blueprint_info" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2" to="UI/Blueprints" method="_on__load_new_blueprint_info"]
 [connection signal="pressed" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" to="UI/Blueprints/VBoxContainer/Blueprints/Tabs/2/Blueprint" method="_on_pressed"]

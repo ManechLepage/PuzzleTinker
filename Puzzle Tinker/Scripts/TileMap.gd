@@ -3,6 +3,8 @@ extends TileMap
 var current_placeholder: StructureScene
 var initialize_placeholder: bool = false
 
+@onready var cables = $Cables
+
 func place_structure(structure: Structure, position: Vector2):
 	var structure_position = local_to_map(position)
 	set_cell(1, structure_position, 1, Vector2(0, 0), structure.structure_id)
@@ -12,7 +14,7 @@ func remove_structure(position: Vector2i):
 
 func get_structure(structure_position: Vector2i):
 	for structure in get_children():
-		if local_to_map(structure.position) == structure_position:
+		if local_to_map(structure.global_position) == structure_position:
 			return structure
 	return null
 
@@ -21,7 +23,10 @@ func create_placeholder(structure: Structure):
 	initialize_placeholder = true
 
 func finish_cable_placing():
-	current_placeholder.editing = false
+	erase_cell(1, Vector2i(1000, 1000))
+	if current_placeholder:
+		current_placeholder.editing = false
+	current_placeholder = null
 
 func _process(delta):
 	if initialize_placeholder:
@@ -43,7 +48,7 @@ func _process(delta):
 			else:
 				current_placeholder.get_node("Placeholder").placeholder()
 			if current_placeholder.connect_to_ground:
-				current_placeholder.get_node("ConnectToGround").to_ground(get_used_cells(0), get_used_cells(1), local_to_map(current_placeholder.position))
+				current_placeholder.get_node("ConnectToGround").to_ground()
 		else:
 			if current_placeholder.editing:
 				var structure = get_structure(local_to_map(get_global_mouse_position()))
@@ -66,6 +71,7 @@ func clear_placeholder():
 		if current_placeholder.placeholder:
 			current_placeholder.queue_free()
 		current_placeholder = null
+		erase_cell(1, Vector2i(1000, 1000))
 
 func can_place_cable():
 	for structure in get_children():
