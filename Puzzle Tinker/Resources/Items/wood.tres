@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cqmov8rq37ywl"]
+
+[ext_resource type="Texture2D" uid="uid://c4rk0atn666bp" path="res://Graphics/Items/wood.aseprite" id="1_5r6kl"]
+[ext_resource type="Script" path="res://Scripts/Items/Item.gd" id="1_fonjg"]
+
+[resource]
+script = ExtResource("1_fonjg")
+name = &"Wood"
+icon = ExtResource("1_5r6kl")
+tinker_type = 0

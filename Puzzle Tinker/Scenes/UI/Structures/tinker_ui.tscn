@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf57nspdjc6pp"]
+[gd_scene load_steps=6 format=3 uid="uid://bf57nspdjc6pp"]
 
 [ext_resource type="Script" path="res://Scripts/UI/TinkerUI.gd" id="1_jwllu"]
+[ext_resource type="Theme" uid="uid://dn0r3m0c3h4xj" path="res://Graphics/UI/main_theme.tres" id="1_qgjul"]
 [ext_resource type="PackedScene" uid="uid://5uauapypugre" path="res://Scenes/UI/Inventory/item_button.tscn" id="2_khqlb"]
 [ext_resource type="Script" path="res://Scripts/UI/TinkerLoadItem.gd" id="3_ekt7q"]
 [ext_resource type="Texture2D" uid="uid://c468jbf466btk" path="res://Graphics/UI/simple-arrow-sign-png.webp" id="4_s874v"]
 
-[node name="TinkerUI" type="Control"]
+[node name="AssemblerUI" type="Control"]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
@@ -19,6 +20,7 @@ offset_right = 185.0
 offset_bottom = 117.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_qgjul")
 script = ExtResource("1_jwllu")
 item_button = ExtResource("2_khqlb")
 
@@ -45,7 +47,7 @@ anchor_right = 1.0
 offset_top = 4.0
 offset_bottom = 36.0
 grow_horizontal = 2
-text = "Tinkerer"
+text = "Assembler"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -31,7 +31,7 @@ script = ExtResource("1_mpvm7")
 placeholder = false
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0.00345216, 6.48063, 0.00650959, 12.0049, 0.00916685, 16.5719, 0.0113822, 20.1772, 0.0131495, 22.8185, 0.0142723, 24.4868, 0.0144114, 25.177, -0.00828329, 23.5176, -0.00715577, 20.8721, -0.00562382, 17.2673, -0.00386927, 12.7035, -0.00202012, 7.18089, -0.00019335, 0.7, 0, 0)
+points = PackedVector2Array(0, 0, 1.21633e-42, 3.62467, 2.40042e-42, 6.28364, 3.50465e-42, 8.31182, 4.49256e-42, 9.90041, 5.33194e-42, 11.1569, 6.0424e-42, 12.1409, 7.04853e-42, 12.8853, 1.33123e-43, 12.008, 5.57717e-43, 10.9189, 5.49309e-43, 9.6232, 4.24593e-43, 8.12397, 2.41023e-43, 5.66199, 2.8026e-44, 0.7, 0, 0)
 width = 1.0
 default_color = Color(0.802397, 0.516804, 0.173884, 1)
 sharp_limit = 0.0
@@ -50,6 +50,10 @@ ropeLength = 10.0
 constrain = 0.7
 gravity = Vector2(0, 30)
 dampening = 0.8
+transport_time = 0.75
+
+[node name="Timer" type="Timer" parent="CableComponent"]
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Path2D")
@@ -63,3 +67,5 @@ curve = SubResource("Curve2D_3kbw3")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-4.76837e-07, 0)
 rotation = 1.05841
+
+[connection signal="timeout" from="CableComponent/Timer" to="CableComponent" method="_on_timer_timeout"]

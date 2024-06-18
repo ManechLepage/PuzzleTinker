@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://ct8wgsg85egkc"]
+
+[ext_resource type="Texture2D" uid="uid://djwdn6ukmhtp8" path="res://Graphics/Items/sidewall_pad.aseprite" id="1_giuo0"]
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_t6jtt"]
+
+[resource]
+script = ExtResource("1_t6jtt")
+structure_id = 101
+name = &"Sidewall Pad"
+icon = ExtResource("1_giuo0")
+tinker_type = 0

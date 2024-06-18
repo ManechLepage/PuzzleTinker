@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://chbv1u3sqnw7y"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_tyssl"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_ofj7p"]
+[ext_resource type="Texture2D" uid="uid://drtpfv4w58yb8" path="res://Graphics/Structures/wooden_box.aseprite" id="3_ux0dv"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/UIComponent.gd" id="5_3oqhk"]
+[ext_resource type="PackedScene" uid="uid://bf57nspdjc6pp" path="res://Scenes/UI/Structures/tinker_ui.tscn" id="6_fci1t"]
+[ext_resource type="PackedScene" uid="uid://yqqosivmew03" path="res://Scenes/Structures/Components/placeholder.tscn" id="6_fyv0h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
+resource_local_to_scene = true
+shader = ExtResource("2_ofj7p")
+shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
+shader_parameter/tint_factor = 0.0
+shader_parameter/fade = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7555d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ux0dv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_haqke"]
+size = Vector2(32, 32)
+
+[node name="Structure" type="RigidBody2D"]
+texture_filter = 1
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_tyssl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_kl174")
+sprite_frames = SubResource("SpriteFrames_7555d")
+
+[node name="UIComponent" type="Node" parent="."]
+script = ExtResource("5_3oqhk")
+UI = ExtResource("6_fci1t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_haqke")
+
+[node name="Placeholder" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_fyv0h")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[connection signal="disabled" from="." to="UIComponent" method="_disabled"]
+[connection signal="enabled" from="." to="UIComponent" method="_enabled"]

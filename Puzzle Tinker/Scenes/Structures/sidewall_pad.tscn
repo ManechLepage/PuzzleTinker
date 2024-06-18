@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdpwleagnwkds"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_oga2k"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_glbms"]
+[ext_resource type="SpriteFrames" uid="uid://cg522favluu6b" path="res://Graphics/Structures/jump_pad.aseprite" id="3_jq2gx"]
+[ext_resource type="PackedScene" uid="uid://yqqosivmew03" path="res://Scenes/Structures/Components/placeholder.tscn" id="4_w6x84"]
+[ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="5_uhpml"]
+[ext_resource type="PackedScene" uid="uid://b12orppctamxy" path="res://Scenes/Structures/Components/animation_on_power.tscn" id="6_38mng"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/LaunchComponent.gd" id="7_004lv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
+resource_local_to_scene = true
+shader = ExtResource("2_glbms")
+shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
+shader_parameter/tint_factor = 0.0
+shader_parameter/fade = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwd8j"]
+size = Vector2(26, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fmox"]
+size = Vector2(26, 25)
+
+[node name="Structure" type="RigidBody2D"]
+texture_filter = 1
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_oga2k")
+has_power = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_kl174")
+position = Vector2(-1, 0)
+sprite_frames = ExtResource("3_jq2gx")
+speed_scale = 2.0
+
+[node name="Placeholder" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_w6x84")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="Power" parent="." instance=ExtResource("5_uhpml")]
+position = Vector2(0, 12)
+
+[node name="AnimationOnPower" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_38mng")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_bwd8j")
+
+[node name="LaunchComponent" type="Area2D" parent="."]
+script = ExtResource("7_004lv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchComponent"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_0fmox")
+debug_color = Color(0.877571, 0.22544, 0.64384, 0.42)
+
+[node name="Timer" type="Timer" parent="LaunchComponent"]
+wait_time = 0.5
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimationOnPower" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="AnimationOnPower" method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="send_power" from="Power" to="AnimationOnPower" method="change_animation"]
+[connection signal="send_power" from="Power" to="LaunchComponent" method="_on_powered"]
+[connection signal="body_entered" from="LaunchComponent" to="LaunchComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="LaunchComponent" to="LaunchComponent" method="_on_body_exited"]
+[connection signal="timeout" from="LaunchComponent/Timer" to="LaunchComponent" method="_on_timer_timeout"]

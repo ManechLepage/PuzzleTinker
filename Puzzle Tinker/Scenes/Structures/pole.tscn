@@ -57,7 +57,7 @@ sprite = NodePath("../AnimatedSprite2D")
 script = ExtResource("6_vq61x")
 middle = ExtResource("7_iqx3m")
 
-[node name="PowerPosition" parent="." instance=ExtResource("8_3k12l")]
+[node name="Power" parent="." instance=ExtResource("8_3k12l")]
 position = Vector2(0, 7)
 
 [connection signal="mouse_entered" from="Selectable/Area2D" to="Selectable" method="_on_area_2d_mouse_entered"]

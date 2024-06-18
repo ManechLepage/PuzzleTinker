@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://82elgek8unvb"]
+
+[ext_resource type="Texture2D" uid="uid://dsdrf7y7iohqi" path="res://Graphics/Items/static.aseprite" id="1_bqrp4"]
+[ext_resource type="Script" path="res://Scripts/Items/Item.gd" id="1_l8d3d"]
+
+[resource]
+script = ExtResource("1_l8d3d")
+name = &"Static Base"
+icon = ExtResource("1_bqrp4")
+tinker_type = 1

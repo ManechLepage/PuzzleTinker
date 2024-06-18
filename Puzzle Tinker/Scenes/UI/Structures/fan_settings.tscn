@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dclc0eot0s074"]
+
+[ext_resource type="Theme" uid="uid://dn0r3m0c3h4xj" path="res://Graphics/UI/main_theme.tres" id="1_shksg"]
+[ext_resource type="SpriteFrames" uid="uid://bg542hdiqks28" path="res://Graphics/UI/StructureUI/fan_power_settings.aseprite" id="2_3y1lw"]
+[ext_resource type="Script" path="res://Scripts/UI/fan_settings.gd" id="2_mx622"]
+[ext_resource type="Script" path="res://Scripts/UI/FanStrength.gd" id="2_ujvfe"]
+
+[node name="FanUI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_shksg")
+script = ExtResource("2_mx622")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -96.0
+offset_right = 160.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "Fan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 26.0
+offset_right = -3.0
+offset_bottom = 30.0
+grow_horizontal = 2
+
+[node name="Subtitle" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Fan power"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ujvfe")
+textures = ExtResource("2_3y1lw")
+
+[connection signal="gui_input" from="Panel/Image" to="Panel/Image" method="_on_gui_input"]

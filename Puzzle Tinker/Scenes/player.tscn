@@ -15,11 +15,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
 size = Vector2(32, 58)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("is_in_menu", "building_state") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("is_in_menu", "building_state", "falling_state") groups=["Player"]]
 texture_filter = 1
 script = ExtResource("1_kr3eo")
 is_in_menu = NodePath("StateMachine/InMenu")
 building_state = NodePath("StateMachine/Building")
+falling_state = NodePath("StateMachine/Fall")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_012nm")

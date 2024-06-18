@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://66kuflqw83tw"]
+
+[ext_resource type="Resource" uid="uid://cqmov8rq37ywl" path="res://Resources/Items/wood.tres" id="1_vhtyw"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_wv6it"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_whhqm"]
+[ext_resource type="Texture2D" uid="uid://dhvj0auk5tw5o" path="res://Graphics/Items/Blueprints/wooden_box_bp.aseprite" id="3_n5x0p"]
+[ext_resource type="Resource" uid="uid://6rl7na67fltl" path="res://Resources/Items/wooden_box.tres" id="4_423h2"]
+
+[sub_resource type="Resource" id="Resource_vxgmw"]
+script = ExtResource("2_whhqm")
+item = ExtResource("1_vhtyw")
+quantity = 1
+
+[resource]
+script = ExtResource("1_wv6it")
+item = ExtResource("4_423h2")
+icon = ExtResource("3_n5x0p")
+craft = Array[ExtResource("2_whhqm")]([SubResource("Resource_vxgmw")])
+quantity = 1
+type = 0
+description = &"A simple box. Can be pushed around."

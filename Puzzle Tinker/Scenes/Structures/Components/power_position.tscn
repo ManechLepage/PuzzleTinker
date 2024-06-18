@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://bkhnh4j2qvfga"]
+[gd_scene load_steps=2 format=3 uid="uid://bkhnh4j2qvfga"]
 
-[node name="PowerPosition" type="Node2D" groups=["PowerPosition"]]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/Power.gd" id="1_iubtw"]
+
+[node name="Power" type="Node2D" groups=["PowerPosition"]]
 position = Vector2(0, 8)
+script = ExtResource("1_iubtw")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://dplp0knh4y2am"]
+
+[ext_resource type="Resource" uid="uid://ck7baaias0aoe" path="res://Resources/Items/iron.tres" id="1_hlu5i"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_spa1s"]
+[ext_resource type="Texture2D" uid="uid://dc3s34g54ye5q" path="res://Graphics/Items/Blueprints/static_bp.aseprite" id="3_skbpf"]
+[ext_resource type="Resource" uid="uid://82elgek8unvb" path="res://Resources/Items/static.tres" id="4_y4gru"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="5_yuvx3"]
+
+[sub_resource type="Resource" id="Resource_w5urv"]
+script = ExtResource("2_spa1s")
+item = ExtResource("1_hlu5i")
+quantity = 1
+
+[resource]
+script = ExtResource("5_yuvx3")
+item = ExtResource("4_y4gru")
+icon = ExtResource("3_skbpf")
+craft = Array[ExtResource("2_spa1s")]([SubResource("Resource_w5urv")])
+quantity = 1
+type = 1
+description = &"The most basic of bases. Will never move!"

@@ -37,11 +37,11 @@ func process_inputs(event):
 	if Input.is_action_just_pressed("Left Click"):
 		if currently_placing.structure_id == 0:
 			if click == 0:
-				if parent.tile_map.can_place_cable():
+				if parent.cable_manager.can_place_cable():
 					click += 1
 					place_cable.emit(currently_placing)
 			else:
-				if parent.tile_map.can_place_cable():
+				if parent.cable_manager.can_place_cable():
 					return idle
 		else:
 			if parent.tile_map.current_placeholder.get_node("Placeholder").can_place:

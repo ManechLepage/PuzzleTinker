@@ -1,12 +1,21 @@
-[gd_resource type="Resource" script_class="Blueprint" load_steps=3 format=3 uid="uid://dbcbfxlk5r5jk"]
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://dbcbfxlk5r5jk"]
 
-[ext_resource type="Resource" uid="uid://kst487i7rgna" path="res://Resources/Items/copper_block.tres" id="1_snrwt"]
+[ext_resource type="Resource" uid="uid://b0ukoln3c511l" path="res://Resources/Items/copper.tres" id="1_t0qc3"]
 [ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_ub82m"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_wvqn3"]
+[ext_resource type="Texture2D" uid="uid://bpfcff7w8ujat" path="res://Graphics/Items/Blueprints/pad_bp.aseprite" id="3_3txh8"]
+[ext_resource type="Resource" uid="uid://c15komo06ruh3" path="res://Resources/Items/pad.tres" id="4_w7deu"]
+
+[sub_resource type="Resource" id="Resource_vo7db"]
+script = ExtResource("2_wvqn3")
+item = ExtResource("1_t0qc3")
+quantity = 1
 
 [resource]
 script = ExtResource("1_ub82m")
-item = ExtResource("1_snrwt")
-craft = Array[Resource("res://Scripts/Blueprints/Craft.gd")]([])
+item = ExtResource("4_w7deu")
+icon = ExtResource("3_3txh8")
+craft = Array[ExtResource("2_wvqn3")]([SubResource("Resource_vo7db")])
 quantity = 1
 type = 2
-description = &""
+description = &"Used for launching stuff."

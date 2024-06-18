@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=3 uid="uid://dxkx6m38r5ycs"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_5frha"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_a1fd1"]
+[ext_resource type="Texture2D" uid="uid://dofjyi63y25je" path="res://Graphics/Structures/static_fan.aseprite" id="3_q2io7"]
+[ext_resource type="PackedScene" uid="uid://yqqosivmew03" path="res://Scenes/Structures/Components/placeholder.tscn" id="4_kjnfb"]
+[ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="5_l581m"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/WindComponent.gd" id="6_0efys"]
+[ext_resource type="SpriteFrames" uid="uid://vagwoyvi1is6" path="res://Graphics/Particles/wind_animation.aseprite" id="7_h18hu"]
+[ext_resource type="PackedScene" uid="uid://ccv580v1uca8a" path="res://Scenes/Structures/Components/selectable.tscn" id="8_5eyrq"]
+[ext_resource type="PackedScene" uid="uid://dulkgxyunxk7l" path="res://Scenes/Structures/Components/ui_component.tscn" id="9_yclny"]
+[ext_resource type="PackedScene" uid="uid://dclc0eot0s074" path="res://Scenes/UI/Structures/fan_settings.tscn" id="10_oaclw"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/FanSettingsUpdate.gd" id="11_xe8wl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
+resource_local_to_scene = true
+shader = ExtResource("2_a1fd1")
+shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
+shader_parameter/tint_factor = 0.0
+shader_parameter/fade = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nuda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_q2io7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwd8j"]
+size = Vector2(26, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ycb0"]
+size = Vector2(33, 78)
+
+[node name="Static Fan" type="RigidBody2D"]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_5frha")
+has_power = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_kl174")
+sprite_frames = SubResource("SpriteFrames_6nuda")
+speed_scale = 2.0
+
+[node name="Placeholder" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_kjnfb")]
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="Power" parent="." instance=ExtResource("5_l581m")]
+position = Vector2(0, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_bwd8j")
+
+[node name="WindComponent" type="Node2D" parent="."]
+scale = Vector2(1, 2)
+script = ExtResource("6_0efys")
+strength = 25.0
+
+[node name="Wind" type="AnimatedSprite2D" parent="WindComponent"]
+visible = false
+position = Vector2(0, -30)
+sprite_frames = ExtResource("7_h18hu")
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="WindComponent"]
+wait_time = 3.0
+
+[node name="Area2D" type="Area2D" parent="WindComponent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindComponent/Area2D"]
+position = Vector2(-0.5, -23)
+shape = SubResource("RectangleShape2D_1ycb0")
+debug_color = Color(0.84299, 0.276082, 0.663661, 0.42)
+
+[node name="Selectable" parent="." instance=ExtResource("8_5eyrq")]
+
+[node name="Area2D" parent="Selectable" index="0"]
+visible = true
+
+[node name="UIComponent" parent="." instance=ExtResource("9_yclny")]
+UI = ExtResource("10_oaclw")
+
+[node name="FanSettingsUpdate" type="Node" parent="UIComponent"]
+script = ExtResource("11_xe8wl")
+
+[connection signal="disabled" from="." to="UIComponent" method="_disabled"]
+[connection signal="enabled" from="." to="UIComponent" method="_enabled"]
+[connection signal="send_power" from="Power" to="WindComponent" method="_on_powered"]
+[connection signal="timeout" from="WindComponent/Timer" to="WindComponent" method="_on_timeout"]
+[connection signal="body_entered" from="WindComponent/Area2D" to="WindComponent" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="WindComponent/Area2D" to="WindComponent" method="_on_area_2d_body_exited"]
+
+[editable path="Selectable"]

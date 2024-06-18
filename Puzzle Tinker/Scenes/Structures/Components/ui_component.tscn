@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dulkgxyunxk7l"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Components/UIComponent.gd" id="1_okdof"]
+[ext_resource type="PackedScene" uid="uid://bf57nspdjc6pp" path="res://Scenes/UI/Structures/tinker_ui.tscn" id="2_qc6mn"]
+
+[node name="UIComponent" type="Node"]
+script = ExtResource("1_okdof")
+UI = ExtResource("2_qc6mn")

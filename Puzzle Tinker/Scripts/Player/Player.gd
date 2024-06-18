@@ -6,6 +6,7 @@ var has_jumped: bool = false
 var facing_right: bool = true
 var tile_map: TileMap
 var inventory: Inventory
+var cable_manager: CableManager
 var current_selected_structure: StructureScene
 
 @export var is_in_menu: State
@@ -17,10 +18,12 @@ signal update_structure_menu
 
 
 @export var building_state: State
+@export var falling_state: State
 
 func _ready():
 	tile_map = get_tree().get_first_node_in_group("TileMap")
 	inventory = get_tree().get_first_node_in_group("Inventory")
+	cable_manager = get_tree().get_first_node_in_group("CableManager")
 	state_machine.init(self)
 
 func _physics_process(delta):
@@ -56,7 +59,11 @@ func remove_placeholder():
 	tile_map.clear_placeholder()
 
 func _on_building_place_cable(cable):
-	tile_map.create_placeholder(cable)
+	cable_manager.place_cable()
 
 func _on_building_finish_cable_placing():
-	tile_map.finish_cable_placing()
+	cable_manager.finish_cable_placing()
+
+func launch(strength):
+	velocity.y = -strength
+	state_machine.change_state(falling_state)

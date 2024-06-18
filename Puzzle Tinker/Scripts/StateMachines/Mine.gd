@@ -35,6 +35,7 @@ func process_frames(delta):
 	return null
 
 func _on_timer_timeout():
-	parent.tile_map.erase_cell(0, currently_mining)
-	parent.inventory.add_item(copper, 1)
+	var tile_data = parent.tile_map.get_cell_tile_data(0, currently_mining)
+	parent.inventory.add_item(tile_data.get_custom_data("resource"), 1)
 	mined = true
+	parent.tile_map.erase_cell(0, currently_mining)

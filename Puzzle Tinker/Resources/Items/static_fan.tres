@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://jp51p78ftwfe"]
+
+[ext_resource type="Texture2D" uid="uid://cf31a30md7vki" path="res://Graphics/Items/still_fan.aseprite" id="1_4tn4o"]
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_cmt4a"]
+
+[resource]
+script = ExtResource("1_cmt4a")
+structure_id = 300
+name = &"Static Fan"
+icon = ExtResource("1_4tn4o")
+tinker_type = 0

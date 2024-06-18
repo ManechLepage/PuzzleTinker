@@ -8,7 +8,7 @@ extends Node2D
 @export var default_color: Color
 @export var error_color: Color
 
-@export_category("Cable Settings")
+@export_category("Physics Settings")
 @export var max_cable_size: float = 40.0
 @export var ropeLength: float = 30
 @export var constrain: float = 1
@@ -17,8 +17,12 @@ extends Node2D
 @export var startPin: bool = true
 @export var endPin: bool = true
 
+@export_category("Power Settings")
+@export var transport_time: float
+
 @onready var line_2d = $"../Line2D"
 @onready var path_2d = $"../Path2D"
+@onready var timer = $Timer
 
 var pos: Array
 var posPrev: Array
@@ -29,12 +33,23 @@ var tile_map: TileMap
 
 var is_in_range: bool = true
 
+signal end_powered
+
 func _ready():
 	line_2d.default_color = default_color
 	pointCount = get_pointCount(ropeLength)
 	resize_arrays()
 	init_position()
 	tile_map = get_tree().get_first_node_in_group("TileMap")
+
+func power():
+	timer.start(transport_time)
+
+func set_to_default_color():
+	line_2d.default_color = default_color
+
+func set_to_error_color():
+	line_2d.default_color = error_color
 
 func get_pointCount(distance: float):
 	return int(ceil(distance / constrain))
@@ -105,3 +120,6 @@ func update_constrain():
 			else:
 				pos[i] -= vec2 * (percent/2)
 				pos[i+1] += vec2 * (percent/2)
+
+func _on_timer_timeout():
+	end_powered.emit()

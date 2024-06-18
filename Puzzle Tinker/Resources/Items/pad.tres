@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c15komo06ruh3"]
+
+[ext_resource type="Texture2D" uid="uid://cf4f1gogegvob" path="res://Graphics/Items/pad.aseprite" id="1_kryhp"]
+[ext_resource type="Script" path="res://Scripts/Items/Item.gd" id="1_kxmvh"]
+
+[resource]
+script = ExtResource("1_kxmvh")
+name = &"Pad"
+icon = ExtResource("1_kryhp")
+tinker_type = 2

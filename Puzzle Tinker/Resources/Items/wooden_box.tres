@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://6rl7na67fltl"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_6qmbl"]
+[ext_resource type="Texture2D" uid="uid://b8ljjbob2gl7b" path="res://Graphics/Items/wooden_box.aseprite" id="1_pqcyt"]
+
+[resource]
+script = ExtResource("1_6qmbl")
+structure_id = 200
+name = &"Wooden Box"
+icon = ExtResource("1_pqcyt")
+tinker_type = 0

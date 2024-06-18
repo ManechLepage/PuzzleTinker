@@ -38,7 +38,7 @@ script = ExtResource("5_xyiq0")
 [node name="Timer" type="Timer" parent="PowerButton"]
 wait_time = 0.7
 
-[node name="PowerPosition" parent="." instance=ExtResource("6_4ktye")]
+[node name="Power" parent="." instance=ExtResource("6_4ktye")]
 
 [connection signal="disabled" from="." to="PowerButton" method="_disabled"]
 [connection signal="enabled" from="." to="PowerButton" method="_enabled"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://cccypac7rqlrl"]
+
+[ext_resource type="Resource" uid="uid://ck7baaias0aoe" path="res://Resources/Items/iron.tres" id="1_pqg85"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_txgdy"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_67bs6"]
+[ext_resource type="Texture2D" uid="uid://brysjntumoels" path="res://Graphics/Items/Blueprints/fan_bp.aseprite" id="3_poqpp"]
+[ext_resource type="Resource" uid="uid://drl7m0rsslxcr" path="res://Resources/Items/fan.tres" id="4_01k6k"]
+
+[sub_resource type="Resource" id="Resource_5c0e5"]
+script = ExtResource("2_67bs6")
+item = ExtResource("1_pqg85")
+quantity = 1
+
+[resource]
+script = ExtResource("1_txgdy")
+item = ExtResource("4_01k6k")
+icon = ExtResource("3_poqpp")
+craft = Array[ExtResource("2_67bs6")]([SubResource("Resource_5c0e5")])
+quantity = 1
+type = 2
+description = &"Blows object in a direction!"

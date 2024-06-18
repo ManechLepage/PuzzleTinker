@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://drl7m0rsslxcr"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Item.gd" id="1_2jnq0"]
+[ext_resource type="Texture2D" uid="uid://pclqgttqhnpd" path="res://Graphics/Items/fan.aseprite" id="1_eb24w"]
+
+[resource]
+script = ExtResource("1_2jnq0")
+name = &"Fan"
+icon = ExtResource("1_eb24w")
+tinker_type = 2

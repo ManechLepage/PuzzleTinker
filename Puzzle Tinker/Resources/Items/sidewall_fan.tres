@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Structure" load_steps=3 format=3 uid="uid://chqyiq6grvknq"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Structure.gd" id="1_vc6be"]
+[ext_resource type="Texture2D" uid="uid://s7jkwo1j83h7" path="res://Graphics/Items/sidewall_fan.aseprite" id="1_w4rm4"]
+
+[resource]
+script = ExtResource("1_vc6be")
+structure_id = 301
+name = &"Sidewall Fan"
+icon = ExtResource("1_w4rm4")
+tinker_type = 0

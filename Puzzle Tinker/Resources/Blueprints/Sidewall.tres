@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Blueprint" load_steps=7 format=3 uid="uid://bcwqfa8n2kq1i"]
+
+[ext_resource type="Resource" uid="uid://ck7baaias0aoe" path="res://Resources/Items/iron.tres" id="1_kx76y"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Craft.gd" id="2_ob6yr"]
+[ext_resource type="Texture2D" uid="uid://rvgsvludtjwo" path="res://Graphics/Items/Blueprints/sidewall_bp.aseprite" id="3_8vlov"]
+[ext_resource type="Resource" uid="uid://cb3ypp6fb0ks0" path="res://Resources/Items/sidewall.tres" id="4_pbkgj"]
+[ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="5_6vdf6"]
+
+[sub_resource type="Resource" id="Resource_v04hv"]
+script = ExtResource("2_ob6yr")
+item = ExtResource("1_kx76y")
+quantity = 1
+
+[resource]
+script = ExtResource("5_6vdf6")
+item = ExtResource("4_pbkgj")
+icon = ExtResource("3_8vlov")
+craft = Array[ExtResource("2_ob6yr")]([SubResource("Resource_v04hv")])
+quantity = 1
+type = 1
+description = &"Can be placed on walls"
