@@ -49,6 +49,7 @@ shape = SubResource("RectangleShape2D_bwd8j")
 
 [node name="LaunchComponent" type="Area2D" parent="."]
 script = ExtResource("7_saij1")
+strength = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchComponent"]
 position = Vector2(0, 3.5)

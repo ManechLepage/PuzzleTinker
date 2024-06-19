@@ -61,7 +61,7 @@ shape = SubResource("RectangleShape2D_bwd8j")
 [node name="WindComponent" type="Node2D" parent="."]
 scale = Vector2(1, 2)
 script = ExtResource("6_0efys")
-strength = 25.0
+strength = Vector2(0, -25)
 
 [node name="Wind" type="AnimatedSprite2D" parent="WindComponent"]
 visible = false

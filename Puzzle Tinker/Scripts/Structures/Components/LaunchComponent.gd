@@ -1,6 +1,6 @@
 extends Area2D
 
-var strength: float = 700.0
+@export var strength: Vector2
 var launch: bool = false
 var player_in_area: bool = false
 @onready var timer = $Timer

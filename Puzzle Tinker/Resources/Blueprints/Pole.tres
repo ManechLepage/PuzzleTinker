@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Blueprint" load_steps=3 format=3 uid="uid://btasrmuakjykm"]
+[gd_resource type="Resource" script_class="Blueprint" load_steps=4 format=3 uid="uid://btasrmuakjykm"]
 
 [ext_resource type="Resource" uid="uid://byjm0mx16acxe" path="res://Resources/Items/pole.tres" id="1_785jj"]
+[ext_resource type="Texture2D" uid="uid://bowud3hywm2dg" path="res://Graphics/Items/Blueprints/pole_bp.aseprite" id="1_o4p82"]
 [ext_resource type="Script" path="res://Scripts/Blueprints/Blueprint.gd" id="1_y4ysu"]
 
 [resource]
 script = ExtResource("1_y4ysu")
 item = ExtResource("1_785jj")
+icon = ExtResource("1_o4p82")
 craft = Array[Resource("res://Scripts/Blueprints/Craft.gd")]([])
 quantity = 1
 type = 0

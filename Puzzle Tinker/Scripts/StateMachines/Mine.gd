@@ -4,24 +4,27 @@ extends State
 @onready var timer = $Timer
 
 var currently_mining: Vector2i
+var mining_data: MiningMaterial
 var mined: bool = false
 
 @export var copper: Item
 
 func enter():
 	super()
-	timer.start()
 	var minerals: Array[Vector2i] 
 	for tile in parent.tile_map.get_surrounding_cells(parent.tile_map.local_to_map(parent.position)):
 		var tile_data = parent.tile_map.get_cell_tile_data(0, tile)
 		if tile_data:
-			if tile_data.get_custom_data("mineral"):
+			if tile_data.get_custom_data("mineral") > -1:
 				minerals.append(tile)
 	
-	if len(minerals) == 1:
+	if len(minerals) > 0:
 		currently_mining = minerals[0]
+		var mining_id = parent.tile_map.get_cell_tile_data(0, minerals[0]).get_custom_data("mineral")
+		mining_data = parent.materials.get_material_from_id(mining_id)
+		timer.start(mining_data.mining_time)
 	else:
-		currently_mining = minerals[0]
+		mined = true
 
 func process_inputs(event):
 	if Input.is_action_pressed("Left Click"):
@@ -35,7 +38,6 @@ func process_frames(delta):
 	return null
 
 func _on_timer_timeout():
-	var tile_data = parent.tile_map.get_cell_tile_data(0, currently_mining)
-	parent.inventory.add_item(tile_data.get_custom_data("resource"), 1)
+	parent.inventory.add_item(mining_data.item, mining_data.quantity)
 	mined = true
 	parent.tile_map.erase_cell(0, currently_mining)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba6chjodbawut"
-path="res://.godot/imported/pole_top.aseprite-1933987a8697c25e1f450a1f198e35c2.ctex"
+uid="uid://c6sg7bgfm4k8d"
+path="res://.godot/imported/pole_middle.png-48a74b5c8d2cb25009742eb86a71d110.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Structures/pole_top.aseprite"
-dest_files=["res://.godot/imported/pole_top.aseprite-1933987a8697c25e1f450a1f198e35c2.ctex"]
+source_file="res://Graphics/Structures/Poles/pole_middle.png"
+dest_files=["res://.godot/imported/pole_middle.png-48a74b5c8d2cb25009742eb86a71d110.ctex"]
 
 [params]
 

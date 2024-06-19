@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdpwleagnwkds"]
+[gd_scene load_steps=10 format=3 uid="uid://bdpwleagnwkds"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_oga2k"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_glbms"]
@@ -15,17 +15,12 @@ shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
 shader_parameter/tint_factor = 0.0
 shader_parameter/fade = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwd8j"]
-size = Vector2(26, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fmox"]
 size = Vector2(26, 25)
 
-[node name="Structure" type="RigidBody2D"]
+[node name="Structure" type="Node2D"]
 texture_filter = 1
 rotation = 1.5708
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_oga2k")
 has_power = true
 
@@ -44,12 +39,9 @@ position = Vector2(0, 12)
 [node name="AnimationOnPower" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_38mng")]
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("RectangleShape2D_bwd8j")
-
 [node name="LaunchComponent" type="Area2D" parent="."]
 script = ExtResource("7_004lv")
+strength = Vector2(1500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaunchComponent"]
 position = Vector2(0, 3.5)

@@ -9,9 +9,14 @@ extends State
 @export var run: State
 @export var idle: State
 
+var can_control: bool = true
+
 func enter():
 	timer.start()
 	super()
+
+func exit():
+	can_control = true
 
 func process_inputs(event):
 	if Input.is_action_just_pressed("Jump"):
@@ -28,7 +33,8 @@ func process_physics(delta):
 	flip_character(movement)
 	
 	parent.velocity.y += gravity * delta * gravity_multiplier
-	parent.velocity.x = movement
+	if can_control:
+		parent.velocity.x = movement
 	parent.move_and_slide()
 	
 	if parent.is_on_floor():

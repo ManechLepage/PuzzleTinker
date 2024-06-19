@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://brhvke4ap5uj1"]
+[gd_scene load_steps=15 format=3 uid="uid://brhvke4ap5uj1"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_qayp8"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_1au3t"]
@@ -30,17 +30,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwd8j"]
-size = Vector2(26, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ycb0"]
 size = Vector2(33, 78)
 
-[node name="Static Fan" type="RigidBody2D"]
+[node name="Static Fan" type="Node2D"]
 texture_filter = 1
 rotation = 1.5708
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_qayp8")
 has_power = true
 
@@ -55,14 +50,10 @@ sprite = NodePath("../AnimatedSprite2D")
 [node name="Power" parent="." instance=ExtResource("5_dw77s")]
 position = Vector2(0, 12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
-shape = SubResource("RectangleShape2D_bwd8j")
-
 [node name="WindComponent" type="Node2D" parent="."]
 scale = Vector2(1, 2)
 script = ExtResource("6_4whlp")
-strength = 25.0
+strength = Vector2(25, 0)
 
 [node name="Wind" type="AnimatedSprite2D" parent="WindComponent"]
 visible = false
@@ -84,6 +75,9 @@ debug_color = Color(0.84299, 0.276082, 0.663661, 0.42)
 
 [node name="Area2D" parent="Selectable" index="0"]
 visible = true
+
+[node name="CollisionShape2D" parent="Selectable/Area2D" index="0"]
+position = Vector2(2.57949e-05, 6.5)
 
 [node name="UIComponent" parent="." instance=ExtResource("9_vojv6")]
 UI = ExtResource("10_uvx0m")

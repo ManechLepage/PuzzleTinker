@@ -21,13 +21,14 @@ func enter():
 		initialize_placeholder.emit(currently_placing)
 
 func exit():
-	if currently_placing.structure_id == 0:
-		click = 0
-		finish_cable_placing.emit()
-	else:
-		parent.remove_placeholder()
-		place_block.emit(currently_placing)
-	parent.inventory.add_item(currently_placing, -1)
+	if currently_placing:
+		if currently_placing.structure_id == 0:
+			click = 0
+			finish_cable_placing.emit()
+		else:
+			place_block.emit(currently_placing)
+		parent.inventory.add_item(currently_placing, -1)
+	parent.remove_placeholder()
 
 func process_inputs(event):
 	#if Input.is_action_just_pressed("Jump") and parent.is_on_floor():
@@ -46,4 +47,7 @@ func process_inputs(event):
 		else:
 			if parent.tile_map.current_placeholder.get_node("Placeholder").can_place:
 				return idle
+	if Input.is_action_just_pressed("Right Click"):
+		currently_placing = null
+		return idle
 	return null

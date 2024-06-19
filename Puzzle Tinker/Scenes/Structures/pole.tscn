@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnbprc0b5j5xi"]
+[gd_scene load_steps=13 format=3 uid="uid://dnbprc0b5j5xi"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_mu2xf"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_xeob4"]
-[ext_resource type="Texture2D" uid="uid://ba6chjodbawut" path="res://Graphics/Structures/pole_top.aseprite" id="3_ly840"]
+[ext_resource type="SpriteFrames" uid="uid://4kxftysfqxu7" path="res://Graphics/Structures/Poles/pole_top_bottom.aseprite" id="3_h31ds"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/Selectable.gd" id="4_bpcqk"]
 [ext_resource type="PackedScene" uid="uid://yqqosivmew03" path="res://Scenes/Structures/Components/placeholder.tscn" id="5_pblrq"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/ConnectToGround.gd" id="6_vq61x"]
-[ext_resource type="PackedScene" uid="uid://brq84r0ghly2" path="res://Scenes/Structures/Components/pole_middle.tscn" id="7_iqx3m"]
+[ext_resource type="PackedScene" uid="uid://brq84r0ghly2" path="res://Scenes/Structures/PoleTypes/pole_middle.tscn" id="7_4j6vy"]
+[ext_resource type="SpriteFrames" uid="uid://ba6chjodbawut" path="res://Graphics/Structures/Poles/pole_top.aseprite" id="7_fyuk7"]
 [ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="8_3k12l"]
+[ext_resource type="PackedScene" uid="uid://cegkhyuo5u70i" path="res://Scenes/Structures/PoleTypes/pole_bottom.tscn" id="9_qi6bt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
 resource_local_to_scene = true
@@ -15,17 +17,6 @@ shader = ExtResource("2_xeob4")
 shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
 shader_parameter/tint_factor = 0.0
 shader_parameter/fade = 1.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7555d"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_ly840")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqadk"]
 size = Vector2(12, 16)
@@ -38,7 +29,7 @@ has_power = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_kl174")
-sprite_frames = SubResource("SpriteFrames_7555d")
+sprite_frames = ExtResource("3_h31ds")
 
 [node name="Selectable" type="Node2D" parent="."]
 script = ExtResource("4_bpcqk")
@@ -53,9 +44,12 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="Placeholder" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_pblrq")]
 sprite = NodePath("../AnimatedSprite2D")
 
-[node name="ConnectToGround" type="Node2D" parent="." groups=["ConnectToGround"]]
+[node name="ConnectToGround" type="Node2D" parent="." node_paths=PackedStringArray("sprite") groups=["ConnectToGround"]]
 script = ExtResource("6_vq61x")
-middle = ExtResource("7_iqx3m")
+top = ExtResource("7_fyuk7")
+middle = ExtResource("7_4j6vy")
+bottom = ExtResource("9_qi6bt")
+sprite = NodePath("../AnimatedSprite2D")
 
 [node name="Power" parent="." instance=ExtResource("8_3k12l")]
 position = Vector2(0, 7)

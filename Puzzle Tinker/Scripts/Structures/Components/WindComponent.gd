@@ -4,7 +4,7 @@ extends Node2D
 @onready var timer = $Timer
 
 var bodies: Array[CollisionObject2D]
-@export var strength: float
+@export var strength: Vector2
 var is_powered: bool = false
 
 func _on_powered():
@@ -25,4 +25,4 @@ func _on_area_2d_body_exited(body):
 func _physics_process(delta):
 	if is_powered:
 		for body in bodies:
-			body.velocity.y -= strength
+			body.velocity -= strength

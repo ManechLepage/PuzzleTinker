@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cegkhyuo5u70i"]
+
+[ext_resource type="SpriteFrames" uid="uid://dngp2kq3toajw" path="res://Graphics/Structures/Poles/pole_bottom.aseprite" id="1_060gu"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = ExtResource("1_060gu")
