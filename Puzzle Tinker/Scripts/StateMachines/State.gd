@@ -3,7 +3,7 @@ extends Node
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var move_speed: float = 225
+var move_speed: float = 110
 
 var parent: Player
 
@@ -27,7 +27,7 @@ func flip_character(movement):
 		parent.facing_right = true
 	elif movement > 0 and parent.facing_right:
 		parent.facing_right = false
-	parent.sprite_2d.flip_h = parent.facing_right
+	parent.sprite.flip_h = parent.facing_right
 
 func can_mine():
 	var player_tile_map_pos = parent.tile_map.local_to_map(parent.position)

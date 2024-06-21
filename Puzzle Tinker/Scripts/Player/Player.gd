@@ -14,7 +14,7 @@ var materials: Materials
 
 signal update_structure_menu
 
-@onready var sprite_2d = $Sprite2D
+@onready var sprite = $Sprite2D
 @onready var state_machine = $StateMachine
 
 
