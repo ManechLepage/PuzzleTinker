@@ -17,6 +17,7 @@ signal update_structure_menu
 @onready var sprite = $Sprite2D
 @onready var state_machine = $StateMachine
 
+@onready var ground_impact_particles = $Particles/GroundImpact
 
 @export var building_state: State
 @export var falling_state: State

@@ -16,6 +16,8 @@ func enter():
 	super()
 
 func exit():
+	if parent.is_on_floor():
+		parent.ground_impact_particles.emitting = true
 	can_control = true
 
 func process_inputs(event):
