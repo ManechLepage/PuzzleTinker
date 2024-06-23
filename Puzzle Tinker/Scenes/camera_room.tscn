@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://k6veqcn47n21"]
+
+[ext_resource type="Script" path="res://Scripts/camera_room.gd" id="1_1u1qn"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_8cmi8"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_edrk6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upknh"]
+resource_local_to_scene = true
+size = Vector2(310, 135)
+
+[sub_resource type="Resource" id="Resource_eoeur"]
+script = ExtResource("2_edrk6")
+duration = 0.75
+transition = 4
+ease = 1
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_1u1qn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_upknh")
+debug_color = Color(0.337255, 0.607843, 0.376471, 0.105882)
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("1_8cmi8")
+follow_mode = 1
+follow_target = NodePath("..")
+frame_preview = false
+tween_resource = SubResource("Resource_eoeur")
+draw_limits = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

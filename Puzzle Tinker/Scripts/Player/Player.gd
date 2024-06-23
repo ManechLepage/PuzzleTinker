@@ -9,6 +9,7 @@ var inventory: Inventory
 var cable_manager: CableManager
 var current_selected_structure: StructureScene
 var materials: Materials
+var camera_manager: CameraManager
 
 @export var is_in_menu: State
 
@@ -27,6 +28,7 @@ func _ready():
 	inventory = get_tree().get_first_node_in_group("Inventory")
 	cable_manager = get_tree().get_first_node_in_group("CableManager")
 	materials = get_tree().get_first_node_in_group("Materials")
+	camera_manager = get_tree().get_first_node_in_group("Camera")
 	state_machine.init(self)
 
 func _physics_process(delta):

@@ -11,12 +11,14 @@ func enter():
 		is_idle = true
 	else:
 		parent.current_selected_structure.enable()
+		parent.camera_manager.zoom_on_structure(parent.current_selected_structure.position)
 	structure = parent.current_selected_structure
 
 func exit():
 	super()
 	if structure:
 		structure.disable()
+		parent.camera_manager.unzoom()
 
 func process_frames(delta):
 	if is_idle:
