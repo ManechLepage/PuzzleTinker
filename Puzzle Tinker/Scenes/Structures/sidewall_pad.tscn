@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdpwleagnwkds"]
+[gd_scene load_steps=11 format=3 uid="uid://bdpwleagnwkds"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_oga2k"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_glbms"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkhnh4j2qvfga" path="res://Scenes/Structures/Components/power_position.tscn" id="5_uhpml"]
 [ext_resource type="PackedScene" uid="uid://b12orppctamxy" path="res://Scenes/Structures/Components/animation_on_power.tscn" id="6_38mng"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/LaunchComponent.gd" id="7_004lv"]
+[ext_resource type="PackedScene" uid="uid://dxx1e6yp45jt7" path="res://Scenes/Structures/Components/side_wall.tscn" id="8_wuje0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
 resource_local_to_scene = true
@@ -22,6 +23,7 @@ size = Vector2(26, 25)
 texture_filter = 1
 rotation = 1.5708
 script = ExtResource("1_oga2k")
+placement_type = 2
 has_power = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -51,6 +53,8 @@ debug_color = Color(0.877571, 0.22544, 0.64384, 0.42)
 [node name="Timer" type="Timer" parent="LaunchComponent"]
 wait_time = 0.5
 
+[node name="SideWall" parent="." instance=ExtResource("8_wuje0")]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimationOnPower" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="AnimationOnPower" method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="send_power" from="Power" to="AnimationOnPower" method="change_animation"]
@@ -58,3 +62,5 @@ wait_time = 0.5
 [connection signal="body_entered" from="LaunchComponent" to="LaunchComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="LaunchComponent" to="LaunchComponent" method="_on_body_exited"]
 [connection signal="timeout" from="LaunchComponent/Timer" to="LaunchComponent" method="_on_timer_timeout"]
+[connection signal="update_to_left" from="SideWall" to="LaunchComponent" method="update_side"]
+[connection signal="update_to_right" from="SideWall" to="LaunchComponent" method="update_side"]

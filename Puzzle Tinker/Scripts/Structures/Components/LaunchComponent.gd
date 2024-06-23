@@ -23,3 +23,6 @@ func _on_timer_timeout():
 func _on_body_exited(body):
 	if body.is_class("CharacterBody2D"):
 		player_in_area = false
+
+func update_side():
+	strength *= -1

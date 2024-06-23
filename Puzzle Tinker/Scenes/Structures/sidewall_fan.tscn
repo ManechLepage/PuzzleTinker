@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://brhvke4ap5uj1"]
+[gd_scene load_steps=16 format=3 uid="uid://brhvke4ap5uj1"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_qayp8"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_1au3t"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dulkgxyunxk7l" path="res://Scenes/Structures/Components/ui_component.tscn" id="9_vojv6"]
 [ext_resource type="PackedScene" uid="uid://dclc0eot0s074" path="res://Scenes/UI/Structures/fan_settings.tscn" id="10_uvx0m"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/FanSettingsUpdate.gd" id="11_a7lfj"]
+[ext_resource type="PackedScene" uid="uid://dxx1e6yp45jt7" path="res://Scenes/Structures/Components/side_wall.tscn" id="12_derhe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
 resource_local_to_scene = true
@@ -37,6 +38,7 @@ size = Vector2(33, 78)
 texture_filter = 1
 rotation = 1.5708
 script = ExtResource("1_qayp8")
+placement_type = 2
 has_power = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -85,11 +87,15 @@ UI = ExtResource("10_uvx0m")
 [node name="FanSettingsUpdate" type="Node" parent="UIComponent"]
 script = ExtResource("11_a7lfj")
 
+[node name="SideWall" parent="." instance=ExtResource("12_derhe")]
+
 [connection signal="disabled" from="." to="UIComponent" method="_disabled"]
 [connection signal="enabled" from="." to="UIComponent" method="_enabled"]
 [connection signal="send_power" from="Power" to="WindComponent" method="_on_powered"]
 [connection signal="timeout" from="WindComponent/Timer" to="WindComponent" method="_on_timeout"]
 [connection signal="body_entered" from="WindComponent/Area2D" to="WindComponent" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="WindComponent/Area2D" to="WindComponent" method="_on_area_2d_body_exited"]
+[connection signal="update_to_left" from="SideWall" to="WindComponent" method="_update_to_left"]
+[connection signal="update_to_right" from="SideWall" to="WindComponent" method="_update_to_right"]
 
 [editable path="Selectable"]

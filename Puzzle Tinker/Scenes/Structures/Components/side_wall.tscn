@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxx1e6yp45jt7"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Components/side_wall.gd" id="1_sxot5"]
+
+[node name="SideWall" type="Node"]
+script = ExtResource("1_sxot5")

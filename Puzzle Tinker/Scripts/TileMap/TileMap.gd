@@ -4,10 +4,12 @@ var current_placeholder: StructureScene
 var initialize_placeholder: bool = false
 
 @onready var cables = $Cables
+@onready var placement_manager = %PlacementManager
 
 func place_structure(structure: Structure, position: Vector2):
 	var structure_position = local_to_map(position)
 	set_cell(1, structure_position, 1, Vector2(0, 0), structure.structure_id)
+	placement_manager.update_structure(get_structure(structure_position))
 
 func remove_structure(position: Vector2i):
 	erase_cell(1, position)
@@ -31,12 +33,11 @@ func _process(delta):
 
 	if current_placeholder:
 		current_placeholder.position = map_to_local(local_to_map(get_global_mouse_position()))
-		if local_to_map(current_placeholder.position) in get_used_cells(0):
-			current_placeholder.get_node("Placeholder").placeholder_error()
-		elif local_to_map(current_placeholder.position) in get_used_cells(0):
+		if not placement_manager.is_placeable(current_placeholder.placement_type, local_to_map(current_placeholder.position)):
 			current_placeholder.get_node("Placeholder").placeholder_error()
 		else:
 			current_placeholder.get_node("Placeholder").placeholder()
+			placement_manager.update_structure(current_placeholder)
 		if current_placeholder.connect_to_ground:
 			current_placeholder.get_node("ConnectToGround").to_ground()
 

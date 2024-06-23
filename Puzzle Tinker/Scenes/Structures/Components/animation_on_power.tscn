@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b12orppctamxy"]
 
-[ext_resource type="Script" path="res://Scenes/Structures/AnimationOnPower.gd" id="1_5ccnk"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/AnimationOnPower.gd" id="1_5ccnk"]
 
 [node name="AnimationOnPower" type="Node" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_5ccnk")

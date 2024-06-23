@@ -24,6 +24,7 @@ aseprite_executable_path="C:/Program Files (x86)/Steam/steamapps/common/Aseprite
 
 BlueprintTypes="*res://Scripts/Blueprints/BlueprintTypes.gd"
 TinkerType="*res://Scripts/Items/TinkerType.gd"
+PlacementType="*res://Scripts/Structures/PlacementType.gd"
 
 [display]
 

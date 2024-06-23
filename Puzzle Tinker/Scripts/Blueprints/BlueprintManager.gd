@@ -22,3 +22,9 @@ func get_all_file_paths(path: String) -> Array[String]:
 			file_paths.append(file_path)  
 		file_name = dir.get_next()  
 	return file_paths
+
+func get_blueprint_from_item(item: Item):
+	for blueprint in blueprints:
+		if blueprint.item == item:
+			return blueprint
+	return null

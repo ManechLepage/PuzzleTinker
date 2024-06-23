@@ -4,6 +4,7 @@ extends Node2D
 signal enabled
 signal disabled
 
+@export var placement_type: PlacementType.PlacementTypes
 @export var placeholder: bool = true
 @export var connect_to_ground: bool = false
 @export var has_power: bool = false

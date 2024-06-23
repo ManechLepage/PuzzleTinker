@@ -26,3 +26,9 @@ func _physics_process(delta):
 	if is_powered:
 		for body in bodies:
 			body.velocity -= strength
+
+func _update_to_right():
+	strength *= -1
+
+func _update_to_left():
+	strength *= -1

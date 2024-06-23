@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://8bj6nhi4xed2"]
+[gd_scene load_steps=10 format=3 uid="uid://8bj6nhi4xed2"]
 
 [ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_i00so"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_38u5n"]
 [ext_resource type="Texture2D" uid="uid://bm8ridebyomf2" path="res://Graphics/Structures/assembler.aseprite" id="3_72ij7"]
 [ext_resource type="Script" path="res://Scripts/Structures/Components/Selectable.gd" id="4_w540n"]
 [ext_resource type="PackedScene" uid="uid://dulkgxyunxk7l" path="res://Scenes/Structures/Components/ui_component.tscn" id="5_gu4iy"]
+[ext_resource type="PackedScene" uid="uid://kkotskxj2dsb" path="res://Scenes/UI/Structures/assembler_ui.tscn" id="6_vqiq5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
 resource_local_to_scene = true
@@ -45,6 +46,7 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_pqadk")
 
 [node name="UIComponent" parent="." instance=ExtResource("5_gu4iy")]
+UI = ExtResource("6_vqiq5")
 
 [connection signal="disabled" from="." to="UIComponent" method="_disabled"]
 [connection signal="enabled" from="." to="UIComponent" method="_enabled"]

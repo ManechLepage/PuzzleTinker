@@ -15,9 +15,10 @@ func load_tab(type: int):
 			load_blueprint(blueprint)
 
 func load_blueprint(blueprint: Blueprint):
-	var blueprint_preview = blueprint_preview_scene.instantiate()
-	blueprint_preview.load_blueprint(blueprint)
-	self.add_child(blueprint_preview)
+	var item_preview = blueprint_preview_scene.instantiate()
+	self.add_child(item_preview)
+	item_preview.load_item(blueprint.item).connect(load_blueprint_info)
 
-func load_blueprint_info(blueprint: Blueprint):
+func load_blueprint_info(item: Item):
+	var blueprint = blueprints.get_blueprint_from_item(item)
 	load_new_blueprint_info.emit(blueprint)

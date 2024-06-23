@@ -34,10 +34,9 @@ func _on_pressed(is_top):
 		for item in inventory.data.keys():
 			if item.tinker_type == target_type:
 				var button: Button = item_button.instantiate()
-				button.get_child(0).text = item.name
-				button.pressed.connect(selected_item.bind(item))
 				material_selection.get_child(1).add_child(button)
 				material_selection.get_child(1).move_child(button, 0)
+				button.load_item(item).connect(selected_item)
 	current_selection = is_top
 
 func selected_item(item: Item):
@@ -52,11 +51,10 @@ func selected_item(item: Item):
 func update_output():
 	var can_craft = false
 	for recipe in tinkering_recipes.data:
-		if recipe.base == base.item:
-			if recipe.top == top.item:
+		if recipe.base == base.current_item:
+			if recipe.top == top.current_item:
 				can_craft = true
 				output.texture = recipe.output.icon
-				output.get_child(0).text = recipe.output.name
 				current_recipe = recipe
 	
 	build.disabled = !can_craft
