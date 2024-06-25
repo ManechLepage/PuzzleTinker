@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Background" load_steps=3 format=3 uid="uid://0pa32yismk5h"]
+
+[ext_resource type="Texture2D" uid="uid://ccspnkjj6ln1t" path="res://Graphics/Background/Layer1/blue.aseprite" id="1_61ge4"]
+[ext_resource type="Script" path="res://Scripts/Room/RoomBackground.gd" id="1_v8rsd"]
+
+[resource]
+script = ExtResource("1_v8rsd")
+layer1 = ExtResource("1_61ge4")

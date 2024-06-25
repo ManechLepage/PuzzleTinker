@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dq0dlmq0r070t"]
+[gd_scene load_steps=70 format=3 uid="uid://dq0dlmq0r070t"]
 
 [ext_resource type="PackedScene" uid="uid://ptf7ir27qjf2" path="res://Scenes/player.tscn" id="1_8xhch"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_qalh8"]
@@ -40,6 +40,7 @@
 [ext_resource type="Resource" uid="uid://h3it2y5twawl" path="res://Resources/Items/static_pad.tres" id="15_t53py"]
 [ext_resource type="Resource" uid="uid://c15komo06ruh3" path="res://Resources/Items/pad.tres" id="16_xsgw3"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="17_atadx"]
+[ext_resource type="Resource" uid="uid://0pa32yismk5h" path="res://Resources/Backgrounds/3x7/3x7(1.1).tres" id="20_vr0qs"]
 [ext_resource type="Resource" uid="uid://jp51p78ftwfe" path="res://Resources/Items/static_fan.tres" id="21_drt1m"]
 [ext_resource type="Resource" uid="uid://drl7m0rsslxcr" path="res://Resources/Items/fan.tres" id="22_gt8lw"]
 [ext_resource type="Resource" uid="uid://cb3ypp6fb0ks0" path="res://Resources/Items/sidewall.tres" id="23_ovvqy"]
@@ -779,6 +780,31 @@ item = ExtResource("6_4xivs")
 [node name="Main" type="Node2D"]
 texture_filter = 1
 
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+
+[node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
+scale = Vector2(16, 16)
+
+[node name="Main" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Main"]
+
+[node name="Detail" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Detail"]
+
+[node name="Foreground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Foreground"]
+
 [node name="TileMap" type="TileMap" parent="." groups=["TileMap"]]
 texture_filter = 1
 tile_set = SubResource("TileSet_rmiml")
@@ -811,6 +837,7 @@ draw_limits = true
 
 [node name="Room" parent="CameraManager" instance=ExtResource("15_suv6m")]
 position = Vector2(-137, 78)
+background = ExtResource("20_vr0qs")
 
 [node name="CollisionShape2D" parent="CameraManager/Room/Area2D" index="0"]
 position = Vector2(-2.5, 3.5)
@@ -1113,6 +1140,12 @@ offset_bottom = 34.0
 grow_horizontal = 0
 text = "X"
 
+[connection signal="disabled" from="TileMap/Button" to="TileMap/Button/DiscoverBlueprint" method="_on_button_disabled"]
+[connection signal="enabled" from="TileMap/Button" to="TileMap/Button/DiscoverBlueprint" method="_on_button_enabled"]
+[connection signal="disabled" from="TileMap/@Node2D@45845" to="TileMap/@Node2D@45845/PowerButton" method="_disabled"]
+[connection signal="enabled" from="TileMap/@Node2D@45845" to="TileMap/@Node2D@45845/PowerButton" method="_enabled"]
+[connection signal="disabled" from="TileMap/@Node2D@45846" to="TileMap/@Node2D@45846/UIComponent" method="_disabled"]
+[connection signal="enabled" from="TileMap/@Node2D@45846" to="TileMap/@Node2D@45846/UIComponent" method="_enabled"]
 [connection signal="inventory_update" from="Inventory" to="UI/Inventory" method="_on_inventory_update"]
 [connection signal="tab_changed" from="UI/Blueprints/VBoxContainer/TabBar" to="UI/Blueprints" method="_on_tab_bar_tab_changed"]
 [connection signal="build_blueprints" from="UI/Blueprints/VBoxContainer/Blueprints/Tabs/0" to="UI/Blueprints" method="_on_build_blueprint"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://k6veqcn47n21"]
 
-[ext_resource type="Script" path="res://Scripts/camera_room.gd" id="1_1u1qn"]
+[ext_resource type="Script" path="res://Scripts/Room/camera_room.gd" id="1_1u1qn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_8cmi8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_edrk6"]
 
