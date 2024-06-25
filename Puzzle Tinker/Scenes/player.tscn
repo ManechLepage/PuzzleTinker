@@ -16,12 +16,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp67r"]
 size = Vector2(14, 57)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("is_in_menu", "building_state", "falling_state") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("building_state", "falling_state", "idle_state", "is_in_menu") groups=["Player"]]
 texture_filter = 1
+collision_layer = 3
 script = ExtResource("1_kr3eo")
-is_in_menu = NodePath("StateMachine/InMenu")
 building_state = NodePath("StateMachine/Building")
 falling_state = NodePath("StateMachine/Fall")
+idle_state = NodePath("StateMachine/Idle")
+is_in_menu = NodePath("StateMachine/InMenu")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)

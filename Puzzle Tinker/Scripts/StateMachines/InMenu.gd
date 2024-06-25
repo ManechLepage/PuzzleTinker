@@ -9,16 +9,20 @@ func enter():
 	super()
 	if parent.current_selected_structure == null:
 		is_idle = true
+		structure = null
 	else:
-		parent.current_selected_structure.enable()
-		parent.camera_manager.zoom_on_structure(parent.current_selected_structure.position)
-	structure = parent.current_selected_structure
+		structure = parent.current_selected_structure
+		if structure.get_node("Selectable").zoom:
+			parent.camera_manager.zoom_on_structure(structure.position)
+		structure.enable()
+
 
 func exit():
 	super()
 	if structure:
 		structure.disable()
 		parent.camera_manager.unzoom()
+		structure = null
 
 func process_frames(delta):
 	if is_idle:

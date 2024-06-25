@@ -25,6 +25,7 @@ sprite_frames = ExtResource("3_cp0db")
 frame_progress = 0.671217
 
 [node name="Selectable" parent="." instance=ExtResource("4_2s42x")]
+zoom = false
 
 [node name="Area2D" parent="Selectable" index="0"]
 visible = true

@@ -3,7 +3,7 @@ extends TileMap
 var current_placeholder: StructureScene
 var initialize_placeholder: bool = false
 
-@onready var cables = $Cables
+@onready var cables = $"../Cables"
 @onready var placement_manager = %PlacementManager
 
 func place_structure(structure: Structure, position: Vector2):

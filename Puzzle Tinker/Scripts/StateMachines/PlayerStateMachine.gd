@@ -10,6 +10,7 @@ func init(player: Player):
 	change_state(starting_state)
 
 func change_state(new_state: State):
+	print(new_state.name)
 	if current_state:
 		current_state.exit()
 	

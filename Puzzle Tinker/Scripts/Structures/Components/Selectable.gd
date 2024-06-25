@@ -1,5 +1,7 @@
 extends Node
 
+@export var zoom: bool = true
+
 func _on_area_2d_mouse_entered():
 	get_tree().get_first_node_in_group("Player").set_structure_selection(get_parent())
 

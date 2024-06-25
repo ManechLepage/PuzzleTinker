@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://djarg558wfvrc"]
+
+[ext_resource type="Script" path="res://Scripts/Structures/Structure.gd" id="1_rem4l"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/structure_preview.gdshader" id="2_4pot0"]
+[ext_resource type="Texture2D" uid="uid://ch64uxjkiiwkq" path="res://Graphics/Structures/blueprint_discovery.aseprite" id="3_e2pu4"]
+[ext_resource type="PackedScene" uid="uid://ccv580v1uca8a" path="res://Scenes/Structures/Components/selectable.tscn" id="4_5ew7y"]
+[ext_resource type="Script" path="res://Scripts/Structures/Components/DiscoverBlueprint.gd" id="5_lcxpb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kl174"]
+resource_local_to_scene = true
+shader = ExtResource("2_4pot0")
+shader_parameter/color = Color(0.276, 0.423, 0.75, 1)
+shader_parameter/tint_factor = 0.0
+shader_parameter/fade = 1.0
+
+[node name="Button" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_rem4l")
+has_power = true
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kl174")
+texture = ExtResource("3_e2pu4")
+
+[node name="Selectable" parent="." instance=ExtResource("4_5ew7y")]
+zoom = false
+
+[node name="Area2D" parent="Selectable" index="0"]
+visible = true
+
+[node name="CollisionShape2D" parent="Selectable/Area2D" index="0"]
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="DiscoverBlueprint" type="Node" parent="."]
+script = ExtResource("5_lcxpb")
+
+[connection signal="disabled" from="." to="DiscoverBlueprint" method="_on_button_disabled"]
+[connection signal="enabled" from="." to="DiscoverBlueprint" method="_on_button_enabled"]
+
+[editable path="Selectable"]

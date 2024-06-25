@@ -25,7 +25,10 @@ func _on_area_2d_body_exited(body):
 func _physics_process(delta):
 	if is_powered:
 		for body in bodies:
-			body.velocity -= strength
+			if body.is_in_group("Player"):
+				body.velocity -= strength
+			elif body.is_in_group("Pushable"):
+				body.apply_central_force(Vector2(100, -100))
 
 func _update_to_right():
 	strength *= -1

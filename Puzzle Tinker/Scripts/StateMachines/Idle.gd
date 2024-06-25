@@ -20,7 +20,8 @@ func process_inputs(event):
 		if can_mine():
 			return mine
 	if Input.is_action_just_pressed("Right Click"):
-		return in_menu
+		if parent.current_selected_structure:
+			return in_menu
 	return null
 
 func process_physics(delta):

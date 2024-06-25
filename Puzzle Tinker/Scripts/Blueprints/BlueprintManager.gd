@@ -2,6 +2,11 @@
 extends Node
 
 var blueprints: Array[Blueprint]
+var known_blueprints: Array[Blueprint]
+
+@onready var blueprint_info = %BlueprintInfo
+
+@export var cable: Blueprint
 
 func load_blueprints():
 	var file_paths = get_all_file_paths("res://Resources/Blueprints/")
@@ -23,8 +28,27 @@ func get_all_file_paths(path: String) -> Array[String]:
 		file_name = dir.get_next()  
 	return file_paths
 
-func get_blueprint_from_item(item: Item):
-	for blueprint in blueprints:
-		if blueprint.item == item:
-			return blueprint
+func get_blueprint_from_item(item: Item, known: bool):
+	if known:
+		for blueprint in known_blueprints:
+			if blueprint.item == item:
+				return blueprint
+	else:
+		for blueprint in blueprints:
+			if blueprint.item == item:
+				return blueprint
 	return null
+
+func learn_blueprint(blueprint: Blueprint):
+	blueprint_info.visible = true
+	blueprint_info.load_blueprint(blueprint, true)
+	known_blueprints.append(blueprint)
+
+func _input(event):
+	if Input.is_action_just_pressed("Test1"):
+		learn_blueprint(cable)
+
+func load_blueprint_info(item: Item):
+	var blueprint: Blueprint = get_blueprint_from_item(item, true)
+	blueprint_info.visible = true
+	blueprint_info.load_blueprint(blueprint, false)

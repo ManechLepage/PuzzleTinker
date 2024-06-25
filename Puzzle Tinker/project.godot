@@ -29,6 +29,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 [display]
 
+window/size/always_on_top=true
 window/stretch/mode="viewport"
 
 [editor_plugins]

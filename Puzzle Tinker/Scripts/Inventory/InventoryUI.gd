@@ -1,6 +1,8 @@
 extends Control
 
 @onready var item_container = %ItemContainer
+@onready var item_panel = %Items
+
 @onready var structure_container = %StructureContainer
 @export var item_preview_scene: PackedScene
 @export var structure_preview_scene: PackedScene
@@ -21,6 +23,8 @@ func _on_inventory_update(data: Dictionary):
 			var item_preview = item_preview_scene.instantiate()
 			item_container.add_child(item_preview)
 			item_preview.load_item(item, item.name, item.icon, data.get(item))
+	
+	#item_panel.size.y = (len(item_container.get_children()) * 30)
 
 func on_initializing_building_mode(structure: Structure):
 	get_tree().get_first_node_in_group("Player").start_building(structure)

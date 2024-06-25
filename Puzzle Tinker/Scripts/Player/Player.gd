@@ -11,7 +11,6 @@ var current_selected_structure: StructureScene
 var materials: Materials
 var camera_manager: CameraManager
 
-@export var is_in_menu: State
 
 signal update_structure_menu
 
@@ -22,6 +21,8 @@ signal update_structure_menu
 
 @export var building_state: State
 @export var falling_state: State
+@export var idle_state: State
+@export var is_in_menu: State
 
 func _ready():
 	tile_map = get_tree().get_first_node_in_group("TileMap")
@@ -73,3 +74,6 @@ func launch(strength):
 	velocity += strength
 	falling_state.can_control = false
 	state_machine.change_state(falling_state)
+
+func exit_menu():
+	state_machine.change_state(idle_state)
