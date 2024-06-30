@@ -97,3 +97,4 @@ Escape={
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.458824, 0.141176, 0.219608, 1)
